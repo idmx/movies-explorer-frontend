@@ -1,0 +1,67 @@
+.about-project {
+  padding: 110px 70px;
+  background-color: #fff;
+}
+
+.about-project__title {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 26.6px;
+  padding-bottom: 23px;
+  width: 100%;
+  margin: 0;
+  border-bottom: 2px solid #000;
+}
+
+.about-project__container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.about-project__subtitle {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  padding: 70px 0 26px;
+  margin: 0;
+}
+
+.about-project__description {
+  font-weight: 400;
+  font-size: 14px;
+  margin: 0;
+  line-height: 20px;
+  max-width: 550px;
+  padding-bottom: 110px;
+}
+
+.about-project__term-container {
+  display: flex;
+}
+
+.about-project__term {
+  color: #000;
+  text-align: center;
+  padding: 9px 0;
+  margin: 0;
+}
+
+.about-project__term-name {
+  color: #A0A0A0;
+  flex-grow: 1;
+  padding: 14px 0 0;
+}
+
+.about-project__term:last-of-type {
+  flex-grow: 5;
+}
+
+.about-project__term-frontend {
+  background-color: #2BE080;
+  flex-grow: 1;
+}
+
+.about-project__term-backend {
+  background-color: #F2F2F2;
+  flex-grow: 5;
+}

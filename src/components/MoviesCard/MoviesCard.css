@@ -1,0 +1,53 @@
+.movies-card {
+  max-width: 364px;
+  max-height: 271px;
+}
+
+.movies-card__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.movies-card__info {
+  max-width: 280px;
+}
+
+.movies-card__title {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.moovies-card__duration {
+  color: #A0A0A0;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+}
+
+.moovies-card__favourite {
+  width: 30px;
+  height: 30px;
+  background-image: url("../../images/favourite-on.svg");
+  cursor: pointer;
+  transition: opacity .5s;
+}
+
+.moovies-card__favourite:hover {
+  opacity: .8;
+}
+
+.moovies-card__image {
+  width: 100%;
+  min-height: 203px;
+  background-size: cover;
+  background-position: center;
+}
+
+.favourite {
+  background-image: url("../../images/favourite-off.svg");
+}

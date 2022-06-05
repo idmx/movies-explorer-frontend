@@ -1,0 +1,9 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header__landing {
+  background-color: #5C5C5C;
+}

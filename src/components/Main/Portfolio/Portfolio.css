@@ -1,0 +1,43 @@
+.portfolio {
+  padding: 100px 70px 125px;
+}
+
+.portfolio__title {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: #A0A0A0;
+  padding-bottom: 50px;
+  margin: 0;
+}
+
+.portfolio__link {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 50px;
+  color: #000;
+  text-decoration: none;
+  display: block;
+  padding: 20px 0 19px;
+  margin: 0;
+  transition: opacity .5s;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.portfolio__link:hover {
+  opacity: .5;
+}
+
+.portfolio__link::after {
+  content: url('../../../images/link-arrow.svg');
+  position: absolute;
+  right: 70px;
+}
+
+.portfolio__link:first-of-type {
+  padding-top: 0;
+}
+
+.portfolio__link:last-of-type {
+  border: none;
+}

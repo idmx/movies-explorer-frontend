@@ -1,0 +1,28 @@
+.nav__button-group {
+  padding: 21px 70px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.nav__button {
+  background-color: inherit;
+  border: none;
+  border-radius: 3px;
+  padding: 8px 20px;
+  cursor: pointer;
+  color: #000;
+  transition: opacity .5s;
+}
+
+.nav__button:hover {
+  opacity: 80%;
+}
+
+.nav__button-signup {
+  color: #fff;
+}
+
+.nav__button-signin {
+  background-color: #2BE080;
+}
