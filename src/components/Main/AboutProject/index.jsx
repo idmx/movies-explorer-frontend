@@ -1,30 +1,28 @@
-import React from "react";
-import './AboutProject.css'
+import React from 'react';
+import './AboutProject.css';
 
 const contents = [
   {
-    subtitle: "Дипломный проект включал 5 этапов",
+    subtitle: 'Дипломный проект включал 5 этапов',
     description: `Составление плана, работу над бэкендом,
     вёрстку, добавление функциональности и финальные доработки.`,
-    id: 11
+    id: 11,
   },
   {
-    subtitle: "На выполнение диплома ушло 5 недель",
+    subtitle: 'На выполнение диплома ушло 5 недель',
     description: `У каждого этапа был мягкий и жёсткий дедлайн,
     которые нужно было соблюдать, чтобы успешно защититься.`,
-    id: 12
-  }
-]
+    id: 12,
+  },
+];
 
-const AboutProject = React.forwardRef(( props, ref ) => {
-
-  return(
+const AboutProject = React.forwardRef(( props, ref ) => (
     <section className="about-project" ref={ref}>
       <h2 className="about-project__title" id="#about-project">
         О проекте
       </h2>
       <div className="about-project__container">
-        { contents.map( content => (
+        { contents.map(( content ) => (
           <div key={content.id}>
             <h3 className="about-project__subtitle" >
               { content.subtitle }
@@ -53,7 +51,8 @@ const AboutProject = React.forwardRef(( props, ref ) => {
         </p>
       </div>
     </section>
-  )
-});
+));
+
+AboutProject.displayName = 'AboutProject';
 
 export default AboutProject;

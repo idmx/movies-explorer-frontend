@@ -29,7 +29,13 @@
 }
 
 .portfolio__link::after {
-  content: url('../../../images/link-arrow.svg');
+  content: "";
+  background-image: url('../../../images/link-arrow.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  width: 18px;
+  height: 21px;
   position: absolute;
   right: 70px;
 }
@@ -40,4 +46,35 @@
 
 .portfolio__link:last-of-type {
   border: none;
+}
+
+@media screen and (max-width: 768px) {
+  .portfolio {
+    padding: 90px 50px;
+  }
+
+  .portfolio__link {
+    font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .portfolio {
+    padding: 0 14px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    line-height: 20px;
+    padding-bottom: 40px;
+  }
+
+  .portfolio__link {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .portfolio__link::after {
+    right: 14px;
+  }
 }

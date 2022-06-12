@@ -24,12 +24,16 @@
   font-weight: 400;
   font-size: 50px;
   line-height: 58px;
+  margin: 0;
+  padding: 0 0 26px;
 }
 
 .tech__description {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+  margin: 0;
+  padding: 0;
 }
 
 .tech__technologies {
@@ -49,4 +53,63 @@
   margin: 0 10px;
   max-width: 90px;
   text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .tech {
+    padding: 90px 50px;
+  }
+
+  .tech__description {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .tech__technology {
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  .tech__subtitle {
+    padding: 0 0 22px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .tech {
+    padding: 70px 14px;
+  }
+
+  .tech__title {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 28px;
+  }
+
+  .tech__subtitle {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .tech__description {
+    font-size: 11px;
+    line-height: 16px;
+    padding: 0 0 24px;
+  }
+
+  .tech__technologies {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    max-width: 178px;
+    margin: 0 auto;
+  }
+
+  .tech__technology {
+    margin: 0;
+  }
+
+  .tech__container {
+    padding: 60px 0 50px;
+  }
 }

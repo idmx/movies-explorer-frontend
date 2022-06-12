@@ -1,0 +1,53 @@
+{
+  "root": true,
+  "extends": ["airbnb-base", "plugin:react/recommended", "eslint:recommended"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "localStorage": true,
+    "fetch": true
+  },
+  "rules": {
+    "radix": ["error", "as-needed"],
+    "react/prop-types": "off",
+    "import/extensions": [
+      "error",
+      {
+        "js": "never",
+        "jsx": "never"
+      }
+   ],
+    "no-param-reassign": ["error", { "props": false }],
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "space-in-parens": ["error", "always", { "exceptions": ["{}", "[]", "()"] }],
+    "computed-property-spacing": ["error", "always"],
+    "array-bracket-spacing": ["error", "always", {
+      "objectsInArrays": false,
+      "arraysInArrays": false
+      }],
+    "object-curly-spacing": ["error", "always", {
+      "objectsInObjects": false,
+      "arraysInObjects": false
+      }],
+    "no-unused-vars": "warn",
+    "no-console": "off",
+    "func-names": "off",
+    "no-process-exit": "off",
+    "object-shorthand": "off",
+    "class-methods-use-this": "off",
+    "no-underscore-dangle": 0
+  }
+}

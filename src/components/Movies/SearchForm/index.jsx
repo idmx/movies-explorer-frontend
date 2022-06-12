@@ -1,10 +1,7 @@
-import React, { useState } from "react";
-import './SearchForm.css'
+import React from 'react';
+import './SearchForm.css';
 
-const SearchForm = () => {
-  const [ isShort, setIsShort ] = useState( false );
-
-  return (
+const SearchForm = ( props ) => (
     <div className="search-form">
       <div className="search-form__input-container">
         <input
@@ -17,12 +14,11 @@ const SearchForm = () => {
       <div className="search-form__short-container">
         <p className="search-form__search-title">Короткометражки</p>
         <div
-          className={`search-form__slider ${isShort && "search-form__slider_on"}`}
-          onClick={() => setIsShort( prevState => !prevState )}
+          className={`search-form__slider ${props.isShort && 'search-form__slider_on'}`}
+          onClick={() => props.setIsShort(( prevState ) => !prevState )}
         />
       </div>
     </div>
-  )
-};
+);
 
 export default SearchForm;

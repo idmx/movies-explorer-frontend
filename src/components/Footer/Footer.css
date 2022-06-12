@@ -1,5 +1,5 @@
 .footer {
-  padding: 79px 70px 20px;
+  padding: 80px 70px 20px;
 }
 
 .footer__description {
@@ -37,4 +37,11 @@
 
 .footer__link:hover {
   opacity: .7;
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
 }

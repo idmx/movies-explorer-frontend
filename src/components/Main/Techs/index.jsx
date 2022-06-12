@@ -1,5 +1,5 @@
-import React from "react";
-import './Tech.css'
+import React from 'react';
+import './Tech.css';
 
 const technology = [
   'HTML',
@@ -8,11 +8,10 @@ const technology = [
   'React',
   'Git',
   'Express.js',
-  'mongoDB'
-]
+  'mongoDB',
+];
 
-const Tech = () => {
-  return(
+const Tech = () => (
     <section className="tech">
       <h2 className="tech__title">
         Технологии
@@ -27,7 +26,7 @@ const Tech = () => {
         </p>
       </div>
       <div className="tech__technologies">
-      { technology.map( item => (
+      { technology.map(( item ) => (
           <p
             className="tech__technology"
             key={ item }
@@ -38,7 +37,6 @@ const Tech = () => {
       }
       </div>
     </section>
-  )
-};
+);
 
 export default Tech;

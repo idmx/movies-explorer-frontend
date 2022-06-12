@@ -1,10 +1,8 @@
-import React from "react";
-import promo from '../../../images/promo.svg'
-import './Promo.css'
+import React from 'react';
+import promo from '../../../images/promo.svg';
+import './Promo.css';
 
-const Promo = ( props ) => {
-
-  return(
+const Promo = ( props ) => (
     <section className="promo">
       <div className="promo__container">
         <div className="promo__description">
@@ -15,11 +13,10 @@ const Promo = ( props ) => {
             Листайте ниже, чтобы узнать больше про этот проект и его создателя.
           </p>
         </div>
-        <img src={ promo } alt="promo" />
+        <img src={ promo } alt="promo" className='promo__image'/>
       </div>
       <button className="promo__button-more" onClick={() => props.scroll()}>Узнать больше</button>
     </section>
-  )
-};
+);
 
 export default Promo;

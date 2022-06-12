@@ -47,6 +47,7 @@
   font-size: 13px;
   line-height: 18px;
   padding-right: 14px;
+  margin: 0;
 }
 
 .search-form__slider {
@@ -59,4 +60,20 @@
 
 .search-form__slider_on {
   background-image: url("../../../images/slider-on.svg");
+}
+
+@media screen and (max-width: 768px) {
+  .search-form {
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 30px 68px;
+  }
+
+  .search-form__input-container {
+    width: 100%;
+  }
+  
+  .search-form__short-container {
+    padding-top: 38px;
+  }
 }
