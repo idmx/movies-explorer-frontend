@@ -25,6 +25,8 @@
 .search-form__icon {
   position: absolute;
   background-image: url("../../../images/search.svg");
+  border: none;
+  background-color: inherit;
   width: 34px;
   height: 34px;
   top: 7px;
@@ -75,5 +77,21 @@
   
   .search-form__short-container {
     padding-top: 38px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .search-form {
+    padding: 60px 10px 44px;
+  }
+
+  .search-form__short-container {
+    padding-top: 45px;
+  }
+
+  .search-form__search-title {
+    font-size: 11px;
+    line-height: 18px;
+    padding-right: 13px;
   }
 }

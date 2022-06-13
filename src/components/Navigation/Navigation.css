@@ -5,6 +5,10 @@
   padding: 28px 70px 28px 44px;
 }
 
+.hidden {
+  display: none;
+}
+
 .menu__link {
   font-weight: 500;
   font-size: 13px;
@@ -44,8 +48,8 @@
   right: 22px;
   background-image: url("../../images/close.svg");
   background-size: cover;
-  width: 22px;
-  height: 22px;
+  width: 32px;
+  height: 32px;
 }
 
 .overlay {
@@ -95,7 +99,9 @@
 
   .menu__link {
     width: max-content;
-    padding: 22px 0 0;
+    padding: 22px 0 5px;
+    font-size: 18px;
+    line-height: 22px;
   }
 
   .menu__films-container .menu__link:first-of-type {
@@ -103,6 +109,31 @@
   }
 
   .account {
+    padding: 0;
     margin-bottom: 92px;
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .menu__burger-button {
+    margin: 15px 14px;
+  }
+
+  .menu__link {
+    padding: 15px 0 7px;
+  }
+
+  .menu__films-container .menu__link:first-of-type {
+    padding-top: 144px;
+  }
+
+  .menu {
+    width: 100%;
+  }
+
+  .account {
+    margin: 0 0 55px;
   }
 }

@@ -17,18 +17,23 @@ const AboutMe = () => (
           <p className="about-me__description">
             На данный момент я проживаю в Санкт-Петербурге. Закончил Санкт-Петербургский
             государственный электротехнический университет. Работа в компании &quot;Nord Clan&quot;
-            Фронтенд-разработчиком на стеке: React, Redux, React Router, Typescript, Mui.
+            Фронтенд-разработчиком на стеке: React, Redux, React Router, Typescript, Mui. Перед этим
+            успел поработать в СТЦ на Vue, Router, Vuex 3 месяца, но решил сменить стек.
           </p>
           <div className="about-me__social">
             <a
               className="about-me__link"
               href="https://m.facebook.com"
+              target="_blank"
+              rel="noreferrer"
             >
               Facebook
             </a>
             <a
               className="about-me__link"
               href="https://github.com/idmx"
+              target="_blank"
+              rel="noreferrer"
             >
               Github
             </a>

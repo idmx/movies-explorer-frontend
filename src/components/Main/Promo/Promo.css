@@ -31,6 +31,8 @@
 }
 
 .promo__button-more {
+  font-size: 12px;
+  line-height: 16px;
   color: #FFF;
   padding: 10px 20px;
   background-color: inherit;
@@ -78,12 +80,17 @@
 
   .promo__subtitle {
     text-align: center;
+    max-width: 260px;
+  }
+
+  .promo__button-more {
+    margin: 92px 0 76px;
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 470px) {
   .promo {
-    padding: 70px 30px 0;
+    padding: 70px 10px 0;
   }
 
   .promo__image {
@@ -96,9 +103,10 @@
     line-height: 38px;
     padding: 44px 0 22px;
     text-align: center;
+    letter-spacing: -0.04em;
   }
 
   .promo__button-more {
-    margin: 80px 0 30px;
+    margin: 80px 0 25px;
   }
 }

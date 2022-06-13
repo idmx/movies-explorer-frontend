@@ -1,16 +1,12 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { ROUTES } from '../../utils/constants/routes';
 import './Footer.css';
 
 const Footer = () => {
   const location = useLocation();
 
-  if (
-    location.pathname === '/profile'
-    || location.pathname === '/sign-up'
-    || location.pathname === '/sign-in'
-    || location.pathname === '/404'
-  ) {
+  if ( ROUTES.ROUTE_WITHOUTE_FOOT.includes( location.pathname )) {
     return null;
   }
   return (
@@ -24,18 +20,24 @@ const Footer = () => {
             <a
               className="footer__link footer__text-decor"
               href="https://practicum.yandex.ru"
+              target="_blank"
+              rel="noreferrer"
             >
               Яндекс.Практикум
             </a>
             <a
               className="footer__link footer__text-decor"
               href="https://github.com/idmx"
+              target="_blank"
+              rel="noreferrer"
             >
               Github
             </a>
             <a
               className="footer__link footer__text-decor"
               href="https://m.facebook.com"
+              target="_blank"
+              rel="noreferrer"
             >
               Facebook
             </a>

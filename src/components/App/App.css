@@ -16,3 +16,9 @@
     width: calc(100% - 372px);
   }
 }
+
+@media screen and (max-width: 470px) {
+  .app__sign {
+    width: calc(100% - 60px);
+  }
+}

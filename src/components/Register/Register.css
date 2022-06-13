@@ -10,7 +10,7 @@
 .register__form {
   display: flex;
   flex-direction: column;
-  padding: 40px 0 16px;
+  padding: 20px 0 16px;
 }
 
 .register__label {
@@ -31,6 +31,7 @@
   border-radius: 8px;
   line-height: 46px;
   margin: 0;
+  padding: 0;
 }
 
 .register__submit {
@@ -38,11 +39,14 @@
   background-color: #2BE080;
   border: none;
   border-radius: 3px;
-  margin: 179px 0 0;
+  margin: 91px 0 0;
+  padding: 0;
   width: 396px;
   height: 45px;
   cursor: pointer;
   transition: opacity .5s;
+  font-size: 14px;
+  line-height: 17px;
 }
 
 .register__submit:hover {
@@ -72,5 +76,28 @@
 @media screen and (max-width: 768px) {
   .register__submit {
     margin: 91px 0 0;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .register__title {
+    margin: 0 auto;
+  }
+
+  .register__form { 
+    padding: 60px 0 14px;
+  }
+
+  .register__submit {
+    margin: 179px 0 0;
+    width: 260px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+  
+  .register__yet {
+    font-size: 12px;
+    line-height: 15px;
+    padding-bottom: 30px;
   }
 }

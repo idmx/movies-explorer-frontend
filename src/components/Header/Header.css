@@ -17,5 +17,14 @@
 @media screen and (max-width: 768px) {
   .header__sign {
     width: calc(396px + 60px);
+    padding-top: 214px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .header__sign {
+    width: 100%;
+    justify-content: center;
+    padding: 38px 0 32px;
   }
 }

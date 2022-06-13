@@ -21,6 +21,7 @@
     "fetch": true
   },
   "rules": {
+    "import/prefer-default-export": "off",
     "radix": ["error", "as-needed"],
     "react/prop-types": "off",
     "import/extensions": [

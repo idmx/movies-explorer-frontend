@@ -1,15 +1,16 @@
 .about-me {
-  padding: 100px 70px;
+  padding: 110px 70px 0;
 }
 
 .about-me__title {
   font-weight: 400;
   font-size: 22px;
-  line-height: 26.6px;
+  line-height: 27px;
   padding-bottom: 23px;
   width: 100%;
   margin: 0;
   border-bottom: 2px solid #000;
+  letter-spacing: -0.04em;
 }
 
 .about-me__container {
@@ -69,13 +70,14 @@
   background-image: url("../../../images/face.jpg");
   background-size: cover;
   background-position: center;
-  width: 270px;
-  max-height: 327px;
+  min-width: 270px;
+  height: 327px;
+  border-radius: 10px;
 }
 
 @media screen and (max-width: 768px) {
   .about-me {
-    padding: 90px 50px;
+    padding: 90px 50px 0;
   }
 
   .about-me__name {
@@ -88,24 +90,28 @@
     line-height: 18px;
   }
 
+  .about-me__description {
+    padding-bottom: 85px;
+  }
+
   .about-me__info {
     max-width: 364px;
   }
 
   .about-me__photo {
-    width: 255px;
-    max-height: 307px;
+    min-width: 255px;
+    height: 307px;
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 470px) {
   .about-me {
-    padding: 70px 14px;
+    padding: 80px 14px 70px;
   }
 
   .about-me__title {
-    font-size: 22px;
-    line-height: 26px;
+    font-size: 18px;
+    line-height: 22px;
   }
 
   .about-me__container {
@@ -128,6 +134,8 @@
   }
 
   .about-me__description {
+    font-size: 11px;
+    line-height: 16px;
     padding-bottom: 40px;
   }
 }

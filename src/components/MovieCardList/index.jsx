@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Preloader from '../Movies/Preloader';
 import MoviesCard from '../MoviesCard';
 import './MoviesCardList.css';
 
@@ -25,23 +26,26 @@ const MoviesCardList = ( props ) => {
   }, [ props.isShort ]);
 
   return (
-    <div className="movies-list">
-      <div className="movies-list__container">
-        { movies.map(( item, index ) => (
-            <MoviesCard
-              title={item.title}
-              duration={item.duration}
-              favourite={item.favourite}
-              image={item.image}
-              // Временный key для моковых данных
-              key={item.title + index}
-              isSaved={props.isSaved}
-            />
-        ))
-        }
-      </div>
-      <button className='movies-list__yet'>Еще</button>
-    </div>
+    <>
+      { props.isSearch
+        ? <Preloader />
+        : <div className="movies-list">
+          <div className="movies-list__container">
+            {movies.map(( item, index ) => (
+              <MoviesCard
+                title={item.title}
+                duration={item.duration}
+                favourite={item.favourite}
+                image={item.image}
+                // Временный key для моковых данных
+                key={item.title + index}
+                isSaved={props.isSaved} />
+            ))}
+          </div>
+          <button className='movies-list__yet'>Еще</button>
+        </div>
+      }
+    </>
   );
 };
 

@@ -19,7 +19,7 @@ const Navigation = () => {
           <Link
             to="/"
             className={
-              `menu__link
+              `menu__link hidden
               ${isOpen && 'open'}
               ${location.pathname === '/' && 'menu__selected'}
             `}

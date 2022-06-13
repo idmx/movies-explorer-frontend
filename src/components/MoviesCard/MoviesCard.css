@@ -22,7 +22,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   margin: 0;
-  padding-bottom: 9px;
+  padding: 0 0 9px 14px;
 }
 
 .moovies-card__duration {
@@ -31,7 +31,7 @@
   font-size: 11px;
   line-height: 13px;
   margin: 0;
-  padding-bottom: 14px;
+  padding: 0 0 14px 14px;
 }
 
 .moovies-card__favourite {
@@ -47,6 +47,9 @@
 }
 
 .moovies-card__remove {
+  position: relative;
+  top: -10px;
+  right: 23px;
   width: 8px;
   height: 8px;
   background-image: url("../../images/remove.svg");
@@ -75,5 +78,19 @@
 
   .moovies-card__image {
     min-height: 190px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .movies-card {
+    width: 100%;
+    max-width: 300px;
+    max-height: 236px;
+    padding: 0 0 30px;
+    margin: 0 auto;
+  }
+
+  .moovies-card__image {
+    min-height: 168px;
   }
 }

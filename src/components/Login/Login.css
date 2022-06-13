@@ -9,7 +9,7 @@
 .login__form {
   display: flex;
   flex-direction: column;
-  padding: 40px 0 16px;
+  padding: 20px 0 0;
 }
 
 .login__label {
@@ -42,6 +42,8 @@
   height: 45px;
   cursor: pointer;
   transition: opacity .5s;
+  font-size: 14px;
+  line-height: 17px;
 }
 
 .login__submit:hover {
@@ -53,7 +55,8 @@
   font-size: 14px;
   line-height: 17px;
   color: #A0A0A0;
-  padding-bottom: 70px;
+  padding: 0 0 70px;
+  margin: 0;
   text-align: center;
 }
 
@@ -69,6 +72,29 @@
 
 @media screen and (max-width: 768px) {
   .login__submit {
-    margin: 91px 0 0;
+    margin: 179px 0 16px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .login__title {
+    margin: 0 auto;
+  }
+
+  .login__form { 
+    padding: 60px 0 14px;
+  }
+
+  .login__submit {
+    margin: 267px 0 0;
+    width: 260px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+  
+  .login__not-yet {
+    font-size: 12px;
+    line-height: 15px;
+    padding-bottom: 30px;
   }
 }

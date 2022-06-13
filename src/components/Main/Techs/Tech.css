@@ -6,11 +6,12 @@
 .tech__title {
   font-weight: 400;
   font-size: 22px;
-  line-height: 26.6px;
+  line-height: 27px;
   padding-bottom: 23px;
   width: 100%;
   margin: 0;
   border-bottom: 2px solid #000;
+  letter-spacing: -0.04em;
 }
 
 .tech__container {
@@ -26,6 +27,7 @@
   line-height: 58px;
   margin: 0;
   padding: 0 0 26px;
+  letter-spacing: -0.04em;
 }
 
 .tech__description {
@@ -34,6 +36,7 @@
   line-height: 20px;
   margin: 0;
   padding: 0;
+  letter-spacing: -0.04em;
 }
 
 .tech__technologies {
@@ -50,14 +53,18 @@
   border-radius: 10px;
   background-color: #E8E8E8;
   flex-grow: 1;
-  margin: 0 10px;
+  margin: 0 5px;
   max-width: 90px;
   text-align: center;
 }
 
 @media screen and (max-width: 768px) {
   .tech {
-    padding: 90px 50px;
+    padding: 87px 50px;
+  }
+
+  .tech__container {
+    padding: 80px 0 83px;
   }
 
   .tech__description {
@@ -75,9 +82,10 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 470px) {
   .tech {
-    padding: 70px 14px;
+    padding: 67px 14px;
+    background-color: #FFF;
   }
 
   .tech__title {
@@ -94,7 +102,7 @@
   .tech__description {
     font-size: 11px;
     line-height: 16px;
-    padding: 0 0 24px;
+    padding: 0;
   }
 
   .tech__technologies {

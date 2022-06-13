@@ -24,7 +24,9 @@ const Portfolio = () => (
             href={ item.link }
             key={ item.link }
             className="portfolio__link"
-          >
+            target="_blank"
+            rel="noreferrer"
+            >
             { item.name }
           </a>
       ))
