@@ -1,4 +1,5 @@
 import React from 'react';
+import myPhoto from '../../images/face.jpg';
 import './AboutMe.css';
 
 const AboutMe = () => (
@@ -18,7 +19,7 @@ const AboutMe = () => (
             На данный момент я проживаю в Санкт-Петербурге. Закончил Санкт-Петербургский
             государственный электротехнический университет. Работа в компании &quot;Nord Clan&quot;
             Фронтенд-разработчиком на стеке: React, Redux, React Router, Typescript, Mui. Перед этим
-            успел поработать в СТЦ на Vue, Router, Vuex 3 месяца, но решил сменить стек.
+            успел поработать в СТЦ на Vue, Router, Vuex 3 месяца.
           </p>
           <div className="about-me__social">
             <a
@@ -39,7 +40,11 @@ const AboutMe = () => (
             </a>
           </div>
         </div>
-        <div className="about-me__photo" />
+        <img
+          className="about-me__photo"
+          alt="my photo"
+          src={myPhoto}
+        />
       </div>
     </section>
 );

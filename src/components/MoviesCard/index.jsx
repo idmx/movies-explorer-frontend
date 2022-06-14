@@ -16,13 +16,14 @@ const MoviesCard = ( props ) => {
           <p className="moovies-card__duration">{ convertTime( props.duration ) }</p>
         </div>
         { props.isSaved
-          ? <div className="moovies-card__remove" />
-          : <div className={`moovies-card__favourite ${props.favourite && 'favourite'}`} />
+          ? <button className="moovies-card__remove" />
+          : <button className={`moovies-card__favourite ${props.favourite && 'favourite-off'}`} />
         }
       </div>
-      <div
+      <img
         className="moovies-card__image"
-        style={{ backgroundImage: `url(${props.image})` }}
+        src={ props.image }
+        alt={ props.title }
       />
     </div>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Logo from '../Logo';
-import NavTab from '../Main/NavTab';
+import NavTab from '../NavTab';
 import Navigation from '../Navigation';
 import { ROUTES } from '../../utils/constants/routes';
 import './Header.css';

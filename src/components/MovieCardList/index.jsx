@@ -29,7 +29,7 @@ const MoviesCardList = ( props ) => {
     <>
       { props.isSearch
         ? <Preloader />
-        : <div className="movies-list">
+        : <div className={`${props.isSaved && 'movies-list__saved'} movies-list`}>
           <div className="movies-list__container">
             {movies.map(( item, index ) => (
               <MoviesCard
@@ -42,7 +42,7 @@ const MoviesCardList = ( props ) => {
                 isSaved={props.isSaved} />
             ))}
           </div>
-          <button className='movies-list__yet'>Еще</button>
+          { !props.isSaved && <button className='movies-list__yet'>Еще</button> }
         </div>
       }
     </>

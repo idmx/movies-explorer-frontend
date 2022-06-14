@@ -1,13 +1,16 @@
 .movies-card {
   max-width: 364px;
   max-height: 271px;
-  padding-bottom: 44px;
+  padding-bottom: 30px;
 }
 
 .movies-card__container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: #FDFDFD;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+  min-height: 68px;
 }
 
 .movies-card__info {
@@ -38,8 +41,12 @@
   width: 30px;
   height: 30px;
   background-image: url("../../images/favourite-on.svg");
+  border: none;
+  background-color: inherit;
   cursor: pointer;
   transition: opacity .5s;
+  align-self: flex-start;
+  margin: 19px 14px 19px 0;
 }
 
 .moovies-card__favourite:hover {
@@ -54,18 +61,22 @@
   height: 8px;
   background-image: url("../../images/remove.svg");
   background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: inherit;
   cursor: pointer;
   transition: opacity .5s;
 }
 
 .moovies-card__image {
   width: 100%;
-  min-height: 203px;
-  background-size: cover;
-  background-position: center;
+  height: 100%;
+  max-height: 203px;
+  object-fit: cover;
+  object-position: center;
 }
 
-.favourite {
+.favourite-off {
   background-image: url("../../images/favourite-off.svg");
 }
 
@@ -73,11 +84,11 @@
   .movies-card {
     max-width: 339px;
     max-height: 258px;
-    padding-bottom: 50px;
+    padding-bottom: 40px;
   }
 
   .moovies-card__image {
-    min-height: 190px;
+    max-height: 190px;
   }
 }
 
@@ -86,11 +97,11 @@
     width: 100%;
     max-width: 300px;
     max-height: 236px;
-    padding: 0 0 30px;
+    padding: 0 0 16px;
     margin: 0 auto;
   }
 
   .moovies-card__image {
-    min-height: 168px;
+    max-height: 168px;
   }
 }

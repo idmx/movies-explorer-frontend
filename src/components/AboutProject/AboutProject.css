@@ -28,13 +28,17 @@
   letter-spacing: -0.04em;
 }
 
+.about-project__cart:last-child {
+  padding-left: 30px;
+}
+
 .about-project__description {
   font-weight: 400;
   font-size: 14px;
   margin: 0;
   line-height: 20px;
   max-width: 550px;
-  padding-bottom: 110px;
+  padding: 0 0 110px;
 }
 
 .about-project__term-container {
@@ -81,12 +85,18 @@
 
   .about-project__description {
     padding-bottom: 90px;
+    font-size: 12px;
+    line-height: 18px;
   }
 }
 
 @media screen and (max-width: 470px) {
   .about-project {
     padding: 70px 18px;
+  }
+  
+  .about-project__cart:last-child {
+    padding-left: 0;
   }
 
   .about-project__title {

@@ -14,7 +14,7 @@ const Navigation = () => {
     <>
       { isOpen && <div className='overlay' /> }
       <nav className={`menu ${isOpen && 'open'}`}>
-        { isOpen && <div className='menu__close-button' onClick={handleOpen}/> }
+        { isOpen && <button className='menu__close-button' onClick={handleOpen}/> }
         <div className="menu__films-container">
           <Link
             to="/"
@@ -56,7 +56,7 @@ const Navigation = () => {
           Аккаунт
         </Link>
       </nav>
-      <div className='menu__burger-button' onClick={handleOpen}/>
+      <button className='menu__burger-button' onClick={handleOpen}/>
     </>
   );
 };

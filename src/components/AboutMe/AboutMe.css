@@ -16,7 +16,7 @@
 .about-me__container {
   display: flex;
   justify-content: space-between;
-  padding-top: 66px;
+  padding-top: 65px;
 }
 
 .about-me__info {
@@ -28,7 +28,7 @@
   font-weight: 400;
   line-height: 58px;
   margin: 0;
-  padding-bottom: 18px;
+  padding: 0 10px 18px 0;
 }
 
 .about-me__job {
@@ -36,7 +36,7 @@
   font-weight: 500;
   line-height: 20px;
   margin: 0;
-  padding-bottom: 26px;
+  padding: 0 10px 26px 0;
 }
 
 .about-me__description {
@@ -44,7 +44,7 @@
   font-size: 14px;
   line-height: 22px;
   margin: 0;
-  padding-bottom: 99px;
+  padding: 0 10px 99px 0;
 }
 
 .about-me__social {
@@ -67,10 +67,9 @@
 }
 
 .about-me__photo {
-  background-image: url("../../../images/face.jpg");
-  background-size: cover;
-  background-position: center;
-  min-width: 270px;
+  object-fit: cover;
+  object-position: center;
+  max-width: 270px;
   height: 327px;
   border-radius: 10px;
 }
@@ -99,12 +98,12 @@
   }
 
   .about-me__photo {
-    min-width: 255px;
+    max-width: 255px;
     height: 307px;
   }
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 500px) {
   .about-me {
     padding: 80px 14px 70px;
   }

@@ -7,18 +7,12 @@
 .app__sign {
   display: flex;
   flex-direction: column;
-  width: calc(100% - 884px);
+  max-width: 396px;
   margin: 0 auto;
-}
-
-@media screen and (max-width: 768px) {
-  .app__sign {
-    width: calc(100% - 372px);
-  }
 }
 
 @media screen and (max-width: 470px) {
   .app__sign {
-    width: calc(100% - 60px);
+    max-width: 260px;
   }
 }

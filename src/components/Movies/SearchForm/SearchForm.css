@@ -85,6 +85,11 @@
     padding: 60px 10px 44px;
   }
 
+  .search-form__input {
+    font-size: 11px;
+    line-height: 18px;
+  }
+
   .search-form__short-container {
     padding-top: 45px;
   }

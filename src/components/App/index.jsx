@@ -1,6 +1,7 @@
 import React,
 {
   useState,
+  useRef,
 } from 'react';
 import {
   Route,
@@ -16,18 +17,31 @@ import Profile from '../Profile';
 import Login from '../Login';
 import Register from '../Register';
 import NotFound from '../NotFound';
+import Promo from '../Promo';
+import AboutProject from '../AboutProject';
+import Techs from '../Techs';
+import AboutMe from '../AboutMe';
+import Portfolio from '../Portfolio';
 import './App.css';
 
 function App() {
   const [ isShort, setIsShort ] = useState( false );
   const [ isSearch, setIsSearch ] = useState( false );
+  const ref = useRef();
+
+  const scroll = () => window.scrollTo({ top: ref.current.offsetTop, behavior: 'smooth' });
 
   return (
     <div className='app'>
       <Header />
+      <Main>
       <Switch>
         <Route path="/" exact>
-          <Main />
+          <Promo scroll={scroll}/>
+          <AboutProject ref={ref}/>
+          <Techs />
+          <AboutMe />
+          <Portfolio />
         </Route>
         <Route path="/movies">
           <SearchForm
@@ -72,6 +86,7 @@ function App() {
           <Redirect to="/404" />
         </Route>
       </Switch>
+      </Main>
       <Footer />
     </div>
   );

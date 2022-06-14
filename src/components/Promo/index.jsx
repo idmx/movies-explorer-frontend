@@ -1,5 +1,5 @@
 import React from 'react';
-import promo from '../../../images/promo.svg';
+import promo from '../../images/promo.svg';
 import './Promo.css';
 
 const Promo = ( props ) => (

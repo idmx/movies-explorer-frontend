@@ -23,7 +23,7 @@ const AboutProject = React.forwardRef(( props, ref ) => (
       </h2>
       <div className="about-project__container">
         { contents.map(( content ) => (
-          <div key={content.id}>
+          <div key={content.id} className="about-project__cart">
             <h3 className="about-project__subtitle" >
               { content.subtitle }
             </h3>
