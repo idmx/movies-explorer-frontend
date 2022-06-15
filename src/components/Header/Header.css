@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header__sign {
+  width: calc(396px + 140px);
+  margin: 0 auto;
+  padding: 52px 0 22px;
+}
+
+.header__landing {
+  background-color: #5C5C5C;
+}
+
+@media screen and (max-width: 768px) {
+  .header__sign {
+    width: calc(396px + 60px);
+    padding-top: 214px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .header__sign {
+    width: 100%;
+    justify-content: center;
+    padding: 38px 0 32px;
+  }
+}

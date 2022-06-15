@@ -1,0 +1,143 @@
+.menu {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 28px 70px 28px 44px;
+}
+
+.hidden {
+  display: none;
+}
+
+.menu__link {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  text-decoration: none;
+  color: #000;
+  transition: opacity .5s;
+  padding: 0 8px;
+  cursor: pointer;
+}
+
+.menu__link:hover {
+  opacity: .7;
+}
+
+.account:after {
+  position: relative;
+  content: url("../../images/profile.svg");
+  padding: 0 0 0 23px;
+  top: 2px;
+  line-height: 21px;
+}
+
+.menu__burger-button {
+  display: none;
+  background-image: url("../../images/burger.svg");
+  background-size: cover;
+  border: none;
+  background-color: inherit;
+  width: 44px;
+  height: 44px;
+  margin: 15px 30px;
+}
+
+.menu__close-button {
+  display: none;
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  background-image: url("../../images/close.svg");
+  background-size: cover;
+  border: none;
+  background-color: inherit;
+  width: 32px;
+  height: 32px;
+}
+
+.overlay {
+  position: fixed;
+  width: 100%;
+  padding-left: 30px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  z-index: 1;
+}
+
+@media screen and (max-width: 768px) {
+  .menu {
+    display: none;
+    position: fixed;
+    right: 0;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 520px;
+    padding: 0;
+    background-color: #fff;
+    z-index: 2;
+  }
+
+  .menu__selected {
+    border-bottom: 2px solid #000;
+  }
+
+  .menu__films-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .menu__burger-button {
+    display: block;
+  }
+
+  .menu__close-button {
+    display: block;
+  }
+
+  .open {
+    display: flex;
+  }
+
+  .menu__link {
+    width: max-content;
+    padding: 22px 0 5px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .menu__films-container .menu__link:first-of-type {
+    padding-top: 159px;
+  }
+
+  .account {
+    padding: 0;
+    margin-bottom: 92px;
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .menu__burger-button {
+    margin: 15px 14px;
+  }
+
+  .menu__link {
+    padding: 15px 0 7px;
+  }
+
+  .menu__films-container .menu__link:first-of-type {
+    padding-top: 144px;
+  }
+
+  .menu {
+    width: 100%;
+  }
+
+  .account {
+    margin: 0 0 55px;
+  }
+}

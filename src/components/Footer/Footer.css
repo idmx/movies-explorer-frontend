@@ -1,0 +1,85 @@
+.footer {
+  padding: 80px 70px 20px;
+}
+
+.footer__description {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15.7px;
+  text-align: center;
+  padding: 0 0 20px;
+  margin: 0;
+  border-bottom: 1px solid #E8E8E8;
+  color: #A0A0A0;
+}
+
+.footer__bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0 0;
+}
+
+.footer__text-decor {
+  font-weight: 400;
+  font-size: 13px;
+  margin: 0;
+  line-height: 16px;
+}
+
+.footer__year::before {
+  content: '\00A9  '
+}
+
+.footer__link {
+  color: #000;
+  text-decoration: none;
+  padding-left: 20px;
+  transition: opacity .5s;
+}
+
+.footer__link:hover {
+  opacity: .7;
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .footer {
+    padding: 80px 10px 10px;
+  }
+
+  .footer__description, .footer__text-decor {
+    font-size: 12px;
+    line-height: 14.5px;
+  }
+
+  .footer__bar {
+    flex-direction: column-reverse;
+    align-items: center;
+    padding-top: 30px;
+  }
+
+  .footer__links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer__link {
+    padding: 0 0 12px;
+  }
+
+  .footer__year {
+    padding: 18px 0 0;
+    color: #A0A0A0;
+  }
+
+  .footer__year::before {
+    content: '\00A9'
+  }
+}

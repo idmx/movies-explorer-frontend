@@ -1,0 +1,57 @@
+.nav__button-group {
+  display: flex;
+  align-items: flex-end;
+  padding: 21px 70px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.nav__button {
+  text-decoration: none;
+  background-color: inherit;
+  border: none;
+  border-radius: 3px;
+  padding: 8px 20px;
+  cursor: pointer;
+  color: #000;
+  transition: opacity .5s;
+}
+
+.nav__button:first-of-type {
+  padding: 8px 30px;
+}
+
+.nav__button:hover {
+  opacity: 80%;
+}
+
+.nav__button-signup {
+  color: #FFF;
+}
+
+.nav__button-signin {
+  background-color: #2BE080;
+  border-radius: 3px;
+}
+
+@media screen and (max-width: 768px) {
+  .nav__button-group {
+    padding-right: 30px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .nav__button {
+    padding: 7px 12px;
+  }
+
+  .nav__button:first-of-type {
+    padding: 7px 14px;
+  }
+
+  .nav__button-group {
+    padding: 24px 14px;
+    font-size: 10px;
+  }
+}
