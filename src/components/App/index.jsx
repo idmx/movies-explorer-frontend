@@ -2,6 +2,7 @@ import React,
 {
   useState,
   useRef,
+  useEffect,
 } from 'react';
 import {
   Route,
@@ -23,13 +24,60 @@ import Techs from '../Techs';
 import AboutMe from '../AboutMe';
 import Portfolio from '../Portfolio';
 import './App.css';
+import ProtectedRoute from '../ProtectedRoute';
+import {
+  fetchGetUserInfo, fetchSignIn, fetchSignOut, fetchSignUp,
+} from '../../utils/apis';
 
 function App() {
   const [ isShort, setIsShort ] = useState( false );
   const [ isSearch, setIsSearch ] = useState( false );
+  const [ isLogin, setIsLogin ] = useState( true );
   const ref = useRef();
 
   const scroll = () => window.scrollTo({ top: ref.current.offsetTop, behavior: 'smooth' });
+
+  const handleLogin = ( evt, email, password ) => {
+    evt.preventDefault();
+    fetchSignIn( email, password )
+      .then(( res ) => {
+        console.log( res );
+        setIsLogin( true );
+        localStorage.setItem( 'id', res._id );
+      })
+      .catch(( err ) => console.log( err ));
+  };
+
+  const handleLogout = ( evt ) => {
+    evt.preventDefault();
+    fetchSignOut()
+      .then(() => {
+        setIsLogin( false );
+        localStorage.removeItem( 'id' );
+      })
+      .catch(( err ) => console.log( err ));
+  };
+
+  const handleRegister = ( evt, email, password, name ) => {
+    evt.preventDefault();
+    fetchSignUp( email, password, name )
+      .then(() => {
+        setIsLogin( true );
+        localStorage.removeItem( 'id' );
+      })
+      .catch(( err ) => console.log( err ));
+  };
+
+  useEffect(() => {
+    localStorage.getItem( 'id' )
+      ? fetchGetUserInfo()
+        .then(( res ) => {
+          setIsLogin( true );
+          localStorage.setItem( 'id', res._id );
+        })
+        .catch(( err ) => console.log( err ))
+      : setIsLogin( false );
+  }, []);
 
   return (
     <div className='app'>
@@ -43,7 +91,10 @@ function App() {
           <AboutMe />
           <Portfolio />
         </Route>
-        <Route path="/movies">
+        <ProtectedRoute
+          path="/movies"
+          isLogin={ isLogin }
+        >
           <SearchForm
             isShort={isShort}
             setIsShort={setIsShort}
@@ -53,8 +104,11 @@ function App() {
             isShort={isShort}
             isSearch={isSearch}
           />
-        </Route>
-        <Route path="/saved-movies">
+        </ProtectedRoute>
+        <ProtectedRoute
+          path="/saved-movies"
+          isLogin={ isLogin }
+        >
           <SearchForm
             isShort={isShort}
             setIsShort={setIsShort}
@@ -65,18 +119,27 @@ function App() {
             isSaved={true}
             isSearch={isSearch}
           />
-        </Route>
-        <Route path="/profile">
-          <Profile />
-        </Route>
+        </ProtectedRoute>
+        <ProtectedRoute
+          path="/profile"
+          isLogin={ isLogin }
+        >
+          <Profile handleLogout={ handleLogout }/>
+        </ProtectedRoute>
         <Route path="/sign-in">
           <div className="app__sign">
-            <Login />
+            <Login
+              handleClick={handleLogin}
+              isLogin={ isLogin }
+            />
           </div>
         </Route>
         <Route path="/sign-up">
           <div className="app__sign">
-            <Register />
+            <Register
+              handleClick={ handleRegister }
+              isLogin={ isLogin }
+            />
           </div>
         </Route>
         <Route path="/404">

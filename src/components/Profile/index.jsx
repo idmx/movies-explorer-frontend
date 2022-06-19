@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { fetchSignOut } from '../../utils/apis';
 import './Profile.css';
 
 const userName = 'Вячеслав';
 const userEmail = '123@mail.ru';
 
-const Profile = () => {
+const Profile = ({ handleLogout }) => {
   const [ name, setName ] = useState( userName );
   const [ email, setEmail ] = useState( userEmail );
   const [ disabled, setDisabled ] = useState( true );
@@ -35,7 +36,10 @@ const Profile = () => {
         />
       </div>
       <button className='profile__button profile__edit'>Редактировать</button>
-      <button className='profile__button profile__signout'>Выйти из аккаунта</button>
+      <button
+        className='profile__button profile__signout'
+        onClick={handleLogout}
+      >Выйти из аккаунта</button>
     </div>
   );
 };
