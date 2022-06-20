@@ -1,6 +1,15 @@
-import { fetchSignIn, fetchSignOut, fetchSignUp } from './fetchAuth';
-import { fetchGetUserInfo, fetchUpdateUserInfo } from './fetchUser';
-import { fetchGetSavedMovies, fetchRemoveSavedMovie, fetchSetSavedMovie } from './fetchMovies';
+import {
+  fetchSignIn,
+  fetchSignOut,
+  fetchSignUp,
+  fetchGetUserInfo,
+  fetchUpdateUserInfo,
+  fetchGetSavedMovies,
+  fetchRemoveSavedMovie,
+  fetchSetSavedMovie,
+} from './mainApi';
+
+import { fetchAllMovies } from './mooviesApi';
 
 export {
   fetchSignIn,
@@ -11,4 +20,5 @@ export {
   fetchGetSavedMovies,
   fetchRemoveSavedMovie,
   fetchSetSavedMovie,
+  fetchAllMovies,
 };

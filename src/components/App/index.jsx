@@ -7,6 +7,8 @@ import React,
 import {
   Route,
   Switch,
+  useHistory,
+  useLocation,
 } from 'react-router-dom';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import Header from '../Header';
@@ -32,8 +34,11 @@ import {
 function App() {
   const [ isShort, setIsShort ] = useState( false );
   const [ isSearch, setIsSearch ] = useState( false );
-  const [ isLogin, setIsLogin ] = useState( true );
+  const [ isLogin, setIsLogin ] = useState( null );
+
   const ref = useRef();
+  const location = useLocation();
+  const history = useHistory();
 
   const scroll = () => window.scrollTo({ top: ref.current.offsetTop, behavior: 'smooth' });
 
@@ -62,21 +67,25 @@ function App() {
     evt.preventDefault();
     fetchSignUp( email, password, name )
       .then(() => {
-        setIsLogin( true );
-        localStorage.removeItem( 'id' );
+        console.log( 1 );
       })
       .catch(( err ) => console.log( err ));
   };
 
   useEffect(() => {
-    localStorage.getItem( 'id' )
-      ? fetchGetUserInfo()
+    const path = location.pathname;
+    if ( localStorage.getItem( 'id' )) {
+      fetchGetUserInfo()
         .then(( res ) => {
           setIsLogin( true );
           localStorage.setItem( 'id', res._id );
+          history.push( path );
+          console.log( path );
         })
-        .catch(( err ) => console.log( err ))
-      : setIsLogin( false );
+        .catch(( err ) => console.log( err ));
+    } else {
+      setIsLogin( false );
+    }
   }, []);
 
   return (
@@ -90,6 +99,22 @@ function App() {
           <Techs />
           <AboutMe />
           <Portfolio />
+        </Route>
+        <Route path="/sign-in">
+          <div className="app__sign">
+            <Login
+              handleClick={handleLogin}
+              isLogin={ isLogin }
+            />
+          </div>
+        </Route>
+        <Route path="/sign-up">
+          <div className="app__sign">
+            <Register
+              handleClick={ handleRegister }
+              isLogin={ isLogin }
+            />
+          </div>
         </Route>
         <ProtectedRoute
           path="/movies"
@@ -126,22 +151,6 @@ function App() {
         >
           <Profile handleLogout={ handleLogout }/>
         </ProtectedRoute>
-        <Route path="/sign-in">
-          <div className="app__sign">
-            <Login
-              handleClick={handleLogin}
-              isLogin={ isLogin }
-            />
-          </div>
-        </Route>
-        <Route path="/sign-up">
-          <div className="app__sign">
-            <Register
-              handleClick={ handleRegister }
-              isLogin={ isLogin }
-            />
-          </div>
-        </Route>
         <Route path="/404">
           <NotFound />
         </Route>

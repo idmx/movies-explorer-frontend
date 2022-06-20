@@ -1,29 +1,45 @@
 import React, { useEffect, useState } from 'react';
+import { fetchAllMovies, fetchGetSavedMovies } from '../../utils/apis';
+import { API_MOVIES_URL } from '../../utils/constants/api';
 import Preloader from '../Movies/Preloader';
 import MoviesCard from '../MoviesCard';
 import './MoviesCardList.css';
 
-const mock = Array( 3 ).fill([{
-  title: '33 слова о дизайне',
-  duration: 5040000,
-  favourite: true,
-  image: 'https://klike.net/uploads/posts/2021-01/1611131113_2.jpg',
-},
-{
-  title: '33 слова о дизайне',
-  duration: 1200000,
-  favourite: false,
-  image: 'https://bipbap.ru/wp-content/uploads/2017/04/priroda_kartinki_foto_03.jpg',
-}]).flat( 2 );
-
 const MoviesCardList = ( props ) => {
   const [ movies, setMovies ] = useState([]);
+  const [ favouriteMovies, setFavouriteMovies ] = useState([]);
+
+  const filteredByFavourite = ( films ) => {
+    console.log( favouriteMovies[ 0 ].nameRU, films[ 0 ].nameRU );
+    return films.map(( film ) => ({
+      ...film,
+      favourite: favouriteMovies.some(( movie ) => movie.nameRU === film.nameRU ),
+      _id: favouriteMovies.some(( movie ) => movie.nameRU === film.nameRU )
+        && favouriteMovies.find(( movie ) => movie.nameRU === film.nameRU )._id,
+    }));
+  };
 
   useEffect(() => {
-    setMovies( props.isShort
-      ? mock.filter(( movie ) => movie.duration <= 1800000 )
-      : mock );
-  }, [ props.isShort ]);
+    fetchGetSavedMovies()
+      .then(( res ) => {
+        console.log( res );
+        setFavouriteMovies( res );
+      });
+  }, []);
+
+  useEffect(() => {
+    fetchAllMovies()
+      .then(( res ) => {
+        console.log( res );
+        setMovies( filteredByFavourite( res ));
+      });
+  }, [ favouriteMovies ]);
+
+  // useEffect(() => {
+  //   setMovies( props.isShort
+  //     ? mock.filter(( movie ) => movie.duration <= 1800000 )
+  //     : mock );
+  // }, [ props.isShort ]);
 
   return (
     <>
@@ -33,12 +49,9 @@ const MoviesCardList = ( props ) => {
           <div className="movies-list__container">
             {movies.map(( item, index ) => (
               <MoviesCard
-                title={item.title}
-                duration={item.duration}
-                favourite={item.favourite}
-                image={item.image}
-                // Временный key для моковых данных
-                key={item.title + index}
+                image={`${API_MOVIES_URL}${item.image.url}`}
+                cart={item}
+                key={item.id}
                 isSaved={props.isSaved} />
             ))}
           </div>
