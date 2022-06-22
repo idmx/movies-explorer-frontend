@@ -24,13 +24,17 @@ const MoviesCard = ( props ) => {
   });
 
   const removeFavourite = () => {
-    fetchRemoveSavedMovie( props.cart._id ).then(( res ) => props.removeFavourite( res ));
+    fetchRemoveSavedMovie( props.cart._id )
+      .then(( res ) => props.removeFavourite( res ))
+      .catch(( err ) => props.errorHandler( err ));
   };
 
   const handleFavourite = () => {
     props.cart.favourite
       ? removeFavourite()
-      : fetchSetSavedMovie( getBodySavedMovie()).then(( res ) => props.addFavourite( res ));
+      : fetchSetSavedMovie( getBodySavedMovie())
+        .then(( res ) => props.addFavourite( res ))
+        .catch(( err ) => props.errorHandler( err ));
   };
   return (
     <div className="movies-card">

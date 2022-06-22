@@ -60,8 +60,7 @@ export const fetchSetSavedMovie = ( body ) => fetch( `${API_BASE_URL}/movies`, {
   credentials: api.credentials,
   body: JSON.stringify( body ),
 })
-  .then(( res ) => getResponseData( res ))
-  .catch(() => console.log( body ));
+  .then(( res ) => getResponseData( res ));
 
 export const fetchRemoveSavedMovie = ( moviesId ) => fetch( `${API_BASE_URL}/movies/${moviesId}`, {
   method: 'DELETE',

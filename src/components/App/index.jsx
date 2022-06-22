@@ -30,12 +30,17 @@ import ProtectedRoute from '../ProtectedRoute';
 import {
   fetchGetUserInfo, fetchSignIn, fetchSignOut, fetchSignUp,
 } from '../../utils/apis';
+import { UserContext } from '../../contexts/UserContext';
+import { ErrorContext } from '../../contexts/ErrorContext';
+import ErrorModal from '../ErrorModal';
 
 function App() {
   const [ isShort, setIsShort ] = useState( false );
-  const [ searchText, setSearchText ] = useState( '' );
   const [ isSearch, setIsSearch ] = useState( false );
   const [ isLogin, setIsLogin ] = useState( null );
+  const [ searchText, setSearchText ] = useState( '' );
+  const [ user, setUser ] = useState( '' );
+  const [ error, setError ] = useState( '' );
 
   const ref = useRef();
   const location = useLocation();
@@ -43,15 +48,28 @@ function App() {
 
   const scroll = () => window.scrollTo({ top: ref.current.offsetTop, behavior: 'smooth' });
 
-  const handleLogin = ( evt, email, password ) => {
-    evt.preventDefault();
+  const errorHandler = ( err ) => {
+    console.log( err );
+    err.statusCode
+      ? setError( 'Что-то пошло не так, попробуйте еще раз!' )
+      : setError( err.message );
+  };
+
+  const login = ( email, password ) => {
     fetchSignIn( email, password )
       .then(( res ) => {
-        console.log( res );
         setIsLogin( true );
         localStorage.setItem( 'id', res._id );
+        history.push( '/movies' );
       })
-      .catch(( err ) => console.log( err ));
+      .catch(( err ) => {
+        errorHandler( err );
+      });
+  };
+
+  const handleLogin = ( evt, email, password ) => {
+    evt.preventDefault();
+    login( email, password );
   };
 
   const handleLogout = ( evt ) => {
@@ -61,16 +79,20 @@ function App() {
         setIsLogin( false );
         localStorage.removeItem( 'id' );
       })
-      .catch(( err ) => console.log( err ));
+      .catch(( err ) => {
+        errorHandler( err );
+      });
   };
 
   const handleRegister = ( evt, email, password, name ) => {
     evt.preventDefault();
     fetchSignUp( email, password, name )
       .then(() => {
-        console.log( 1 );
+        login( email, password );
       })
-      .catch(( err ) => console.log( err ));
+      .catch(( err ) => {
+        errorHandler( err );
+      });
   };
 
   useEffect(() => {
@@ -81,9 +103,9 @@ function App() {
           setIsLogin( true );
           localStorage.setItem( 'id', res._id );
           history.push( path );
-          console.log( path );
+          setUser({ name: res.name, email: res.email });
         })
-        .catch(( err ) => console.log( err ));
+        .catch(( err ) => errorHandler( err ));
     } else {
       setIsLogin( false );
     }
@@ -91,6 +113,7 @@ function App() {
 
   return (
     <div className='app'>
+      <ErrorContext.Provider value={{ errorHandler }}>
       <Header />
       <Main>
       <Switch>
@@ -156,7 +179,9 @@ function App() {
           path="/profile"
           isLogin={ isLogin }
         >
-          <Profile handleLogout={ handleLogout }/>
+          <UserContext.Provider value={ user } >
+            <Profile handleLogout={ handleLogout }/>
+          </UserContext.Provider>
         </ProtectedRoute>
         <Route path="/404">
           <NotFound />
@@ -167,6 +192,8 @@ function App() {
       </Switch>
       </Main>
       <Footer />
+      <ErrorModal error={error} setError={setError}/>
+      </ErrorContext.Provider>
     </div>
   );
 }

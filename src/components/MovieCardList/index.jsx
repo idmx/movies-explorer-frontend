@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { fetchAllMovies, fetchGetSavedMovies } from '../../utils/apis';
 import { API_MOVIES_URL } from '../../utils/constants/api';
 import Preloader from '../Movies/Preloader';
 import MoviesCard from '../MoviesCard';
+import { ErrorContext } from '../../contexts/ErrorContext';
 import './MoviesCardList.css';
 
 const MoviesCardList = ( props ) => {
@@ -11,6 +12,8 @@ const MoviesCardList = ( props ) => {
   const [ isFetching, setIsFetching ] = useState( false );
   const [ pages, setPages ] = useState( 1 );
   const [ isEndPages, setIsEndPages ] = useState( false );
+
+  const { errorHandler } = useContext( ErrorContext );
 
   const filteredByFavourite = ( films ) => films.map(( film ) => ({
     ...film,
@@ -64,7 +67,8 @@ const MoviesCardList = ( props ) => {
           localStorage.setItem( 'movies', JSON.stringify( res ));
           setMoviesIsSave( res );
           setIsFetching( false );
-        });
+        })
+        .catch(( err ) => errorHandler( err ));
     }
   };
 
@@ -78,7 +82,8 @@ const MoviesCardList = ( props ) => {
       .then(( res ) => {
         setFavouriteMovies( res );
         setIsFetching( false );
-      });
+      })
+      .catch(( err ) => errorHandler( err ));
   }, []);
 
   useEffect(() => {
@@ -106,6 +111,7 @@ const MoviesCardList = ( props ) => {
                   isSaved={props.isSaved}
                   addFavourite={addFavourite}
                   removeFavourite={removeFavourite}
+                  errorHandler={errorHandler}
                 />
              ))}
           </div>

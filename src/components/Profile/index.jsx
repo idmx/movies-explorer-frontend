@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
-import { fetchSignOut } from '../../utils/apis';
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 import './Profile.css';
 
-const userName = 'Вячеслав';
-const userEmail = '123@mail.ru';
-
 const Profile = ({ handleLogout }) => {
-  const [ name, setName ] = useState( userName );
-  const [ email, setEmail ] = useState( userEmail );
+  const user = useContext( UserContext );
+  const [ name, setName ] = useState( user.name );
+  const [ email, setEmail ] = useState( user.email );
   const [ disabled, setDisabled ] = useState( true );
+
+  useEffect(() => {
+    setName( user.name );
+    setEmail( user.email );
+  }, [ user ]);
 
   return (
     <div className='profile'>
-      <h2 className='profile__say-hi'>Привет, {userName}</h2>
+      <h2 className='profile__say-hi'>Привет, {user.name}</h2>
       <div className='profile__container'>
         <label htmlFor="profile__name" className='profile__text'>Имя</label>
         <input
