@@ -36,6 +36,7 @@
   transition: opacity .5s;
   font-size: 12px;
   line-height: 15px;
+  cursor: pointer;
 }
 
 .movies-list__yet:hover {

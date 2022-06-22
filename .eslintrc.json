@@ -23,6 +23,7 @@
     "fetch": true
   },
   "rules": {
+    "no-unused-expressions": ["error", { "allowTernary": true, "allowShortCircuit": true }],
     "import/prefer-default-export": "off",
     "radix": ["error", "as-needed"],
     "react/prop-types": "off",

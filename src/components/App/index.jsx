@@ -33,6 +33,7 @@ import {
 
 function App() {
   const [ isShort, setIsShort ] = useState( false );
+  const [ searchText, setSearchText ] = useState( '' );
   const [ isSearch, setIsSearch ] = useState( false );
   const [ isLogin, setIsLogin ] = useState( null );
 
@@ -123,11 +124,14 @@ function App() {
           <SearchForm
             isShort={isShort}
             setIsShort={setIsShort}
-            setIsSearch={setIsSearch}
+            setSearchText={setSearchText}
+            handleSearch={() => setIsSearch( true )}
           />
           <MoviesCardList
             isShort={isShort}
+            searchText={searchText}
             isSearch={isSearch}
+            setIsSearch={setIsSearch}
           />
         </ProtectedRoute>
         <ProtectedRoute
@@ -137,12 +141,15 @@ function App() {
           <SearchForm
             isShort={isShort}
             setIsShort={setIsShort}
-            setIsSearch={setIsSearch}
+            setSearchText={setSearchText}
+            handleSearch={() => setIsSearch( true )}
           />
           <MoviesCardList
             isShort={isShort}
             isSaved={true}
+            searchText={searchText}
             isSearch={isSearch}
+            setIsSearch={setIsSearch}
           />
         </ProtectedRoute>
         <ProtectedRoute
