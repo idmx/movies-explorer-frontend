@@ -6,7 +6,6 @@ const ErrorModal = ( props ) => {
   const closeModal = () => {
     props.setError( false );
   };
-  console.log( props.error );
   if ( props.error ) {
     return createPortal(
       <div className="error">

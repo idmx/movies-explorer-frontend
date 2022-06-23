@@ -49,7 +49,6 @@ function App() {
   const scroll = () => window.scrollTo({ top: ref.current.offsetTop, behavior: 'smooth' });
 
   const errorHandler = ( err ) => {
-    console.log( err );
     err.statusCode
       ? setError( 'Что-то пошло не так, попробуйте еще раз!' )
       : setError( err.message );
