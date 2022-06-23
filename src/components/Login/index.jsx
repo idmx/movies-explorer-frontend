@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { useFormWithValidation } from '../../utils/hooks/useFormWithValidation';
 import './Login.css';
 
 const Login = ({ handleClick, isLogin }) => {
-  const [ email, setEmail ] = useState( '' );
-  const [ password, setPassword ] = useState( '' );
+  const {
+    values, handleChange, errors, isValid,
+  } = useFormWithValidation();
   const history = useHistory();
 
   useEffect(() => isLogin && history.push( '/movies' ), [ isLogin ]);
+
+  const handleLogin = ( evt ) => {
+    evt.preventDefault();
+    handleClick( values.email, values.password );
+  };
 
   return (
     <>
@@ -17,22 +24,32 @@ const Login = ({ handleClick, isLogin }) => {
         <input
           type="email"
           id="login__email"
-          className="login__input"
-          value={email}
-          onChange={( evt ) => setEmail( evt.target.value )}
+          className={`login__input ${errors.email && 'login__input-error'}`}
+          name="email"
+          value={values.email}
+          onChange={handleChange}
+          required
         />
+        <p className='login__error'>{errors.email}</p>
         <label htmlFor="login__password" className="login__label">Пароль</label>
         <input
           type="password"
           id="login__password"
-          className="login__input"
-          value={password}
-          onChange={( evt ) => setPassword( evt.target.value )}
+          className={`login__input ${errors.password && 'login__input-error'}`}
+          name="password"
+          value={values.password}
+          onChange={handleChange}
+          required
         />
+        <p className='login__error'>{errors.password}</p>
         <button
           type="submit"
-          className="login__submit"
-          onClick={( evt ) => handleClick( evt, email, password )}>Войти</button>
+          className={`login__submit ${!isValid && 'disabled'}`}
+          onClick={handleLogin}
+          disabled={!isValid}
+        >
+          Войти
+        </button>
       </form>
       <p className="login__not-yet">
         Еще не зарегистрированы? <Link to="sign-up" className="login__signup">Регистрация</Link>

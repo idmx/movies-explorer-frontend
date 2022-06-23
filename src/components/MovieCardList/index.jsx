@@ -8,19 +8,14 @@ import './MoviesCardList.css';
 
 const MoviesCardList = ( props ) => {
   const [ movies, setMovies ] = useState([]);
-  const [ favouriteMovies, setFavouriteMovies ] = useState([]);
   const [ isFetching, setIsFetching ] = useState( false );
-  const [ pages, setPages ] = useState( 1 );
   const [ isEndPages, setIsEndPages ] = useState( false );
+  const [ allMovies, setAllMovies ] = useState([]);
+  const [ favouriteMovies, setFavouriteMovies ] = useState([]);
+  const [ pages, setPages ] = useState( 0 );
+  const [ moviesInPage, setMoviesInPage ] = useState([]);
 
   const { errorHandler } = useContext( ErrorContext );
-
-  const filteredByFavourite = ( films ) => films.map(( film ) => ({
-    ...film,
-    favourite: favouriteMovies.some(( movie ) => movie.nameRU === film.nameRU ),
-    _id: favouriteMovies.some(( movie ) => movie.nameRU === film.nameRU )
-        && favouriteMovies.find(( movie ) => movie.nameRU === film.nameRU )._id,
-  }));
 
   const addFavourite = ( film ) => {
     setFavouriteMovies([ ...favouriteMovies, film ]);
@@ -30,42 +25,16 @@ const MoviesCardList = ( props ) => {
     setFavouriteMovies( favouriteMovies.filter(( movie ) => movie.nameRU !== film.nameRU ));
   };
 
-  const filteredByPages = ( allMovies ) => {
-    pages >= Math.ceil( allMovies.length / 10 ) ? setIsEndPages( true ) : setIsEndPages( false );
-    return allMovies.slice( 0, pages * 10 );
-  };
-
-  const filteredBySearch = ( allMovies ) => {
-    const films = props.isSearch
-      ? allMovies.filter(( movie ) => movie.nameRU.toLowerCase()
-        .includes( props.searchText.toLowerCase()))
-      : allMovies;
-    props.setIsSearch( false );
-    return films;
-  };
-
-  const filteredByShort = ( allMovies ) => ( props.isShort
-    ? allMovies.filter(( movie ) => movie.duration <= 60 )
-    : allMovies );
-
-  const setMoviesIsSave = ( allMovies ) => {
-    let films = filteredBySearch( allMovies );
-    films = filteredByShort( films );
-    films = filteredByFavourite( films );
-    films = props.isSaved ? films.filter(( movie ) => movie.favourite ) : films;
-    setMovies( filteredByPages( films ));
-  };
-
   const getMovies = () => {
-    const allMovies = JSON.parse( localStorage.getItem( 'movies' ));
-    if ( allMovies ) {
-      setMoviesIsSave( allMovies );
+    const allLocalMovies = JSON.parse( localStorage.getItem( 'movies' ));
+    if ( allLocalMovies ) {
+      setAllMovies( allLocalMovies );
     } else {
       setIsFetching( true );
       fetchAllMovies()
         .then(( res ) => {
           localStorage.setItem( 'movies', JSON.stringify( res ));
-          setMoviesIsSave( res );
+          setAllMovies( res );
           setIsFetching( false );
         })
         .catch(( err ) => errorHandler( err ));
@@ -74,6 +43,72 @@ const MoviesCardList = ( props ) => {
 
   const incPages = () => {
     setPages(( prev ) => prev + 1 );
+  };
+
+  function filteredByPages( page, cartInRow ) {
+    ( page * cartInRow ) >= Math.ceil( movies.length )
+      ? setIsEndPages( true )
+      : setIsEndPages( false );
+    return movies.slice( 0, page * cartInRow );
+  }
+
+  function resizeWindow() {
+    if ( !props.isSaved ) {
+      const width = window.innerWidth;
+      let newMovies = [];
+      if ( width >= 768 ) {
+        newMovies = filteredByPages( pages + 4, 3 );
+        ( moviesInPage.length !== newMovies ) && setMoviesInPage( newMovies );
+      } else if ( width >= 480 ) {
+        newMovies = filteredByPages( pages + 4, 2 );
+        ( moviesInPage.length !== newMovies ) && setMoviesInPage( newMovies );
+      } else {
+        newMovies = filteredByPages( pages + 5, 1 );
+        ( moviesInPage.length !== newMovies ) && setMoviesInPage( newMovies );
+      }
+    }
+  }
+
+  const filteredByShort = ( allFilms ) => {
+    const films = allFilms.filter(( movie ) => movie.duration <= 60 );
+    setMovies( films );
+    return films;
+  };
+
+  const filteredBySearch = ( allFilms ) => {
+    const films = allFilms.filter(( movie ) => movie.nameRU.toLowerCase()
+      .includes( props.searchText.toLowerCase()));
+    props.setIsSearch( false );
+    setMovies( films );
+    return films;
+  };
+
+  const filteredByFavourite = ( films ) => films.map(( film ) => ({
+    ...film,
+    favourite: favouriteMovies.some(( movie ) => movie.nameRU === film.nameRU ),
+    _id: favouriteMovies.some(( movie ) => movie.nameRU === film.nameRU )
+        && favouriteMovies.find(( movie ) => movie.nameRU === film.nameRU )._id,
+  }));
+
+  const filteredBySaved = ( allFilms ) => {
+    const films = props.isSaved ? allFilms.filter(( movie ) => movie.favourite ) : allFilms;
+    setMovies( films );
+    return films;
+  };
+
+  const getFilteredMovies = async () => {
+    !allMovies.length && getMovies();
+    let allFilms = [];
+    if ( props.searchText ) {
+      allFilms = filteredBySearch( allMovies );
+    }
+    if ( props.isShort ) {
+      allFilms = filteredByShort( allFilms );
+    }
+    allFilms = filteredBySaved( filteredByFavourite( allFilms ));
+    setMovies( allFilms );
+    props.isSaved && setMoviesInPage( allFilms );
+    resizeWindow();
   };
 
   useEffect(() => {
@@ -87,14 +122,19 @@ const MoviesCardList = ( props ) => {
   }, []);
 
   useEffect(() => {
-    getMovies();
-  }, [ favouriteMovies, props.isSaved, pages, props.isShort ]);
+    getFilteredMovies();
+  }, [ allMovies, favouriteMovies, props.isShort, props.isSaved ]);
 
   useEffect(() => {
-    props.isSearch && getMovies();
+    props.isSearch && getFilteredMovies();
   }, [ props.isSearch ]);
 
-  useEffect(() => setPages( 1 ), [ props.isSaved ]);
+  useEffect(() => {
+    window.addEventListener( 'resize', resizeWindow );
+    return () => window.removeEventListener( 'resize', resizeWindow );
+  }, [ movies, pages ]);
+
+  useEffect(() => resizeWindow(), [ movies, pages ]);
 
   return (
     <>
@@ -103,7 +143,7 @@ const MoviesCardList = ( props ) => {
         : <div className={`${props.isSaved && 'movies-list__saved'} movies-list`}>
           <div className="movies-list__container">
             {
-             movies.map(( item ) => (
+             moviesInPage.map(( item ) => (
                 <MoviesCard
                   image={`${API_MOVIES_URL}${item.image.url}`}
                   cart={item}
@@ -115,7 +155,7 @@ const MoviesCardList = ( props ) => {
                 />
              ))}
           </div>
-          { !isEndPages
+          { !isEndPages && !props.isSaved
               && <button className='movies-list__yet' onClick={incPages}>Еще</button>
           }
         </div>

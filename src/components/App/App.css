@@ -11,7 +11,7 @@
   margin: 0 auto;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 480px) {
   .app__sign {
     max-width: 260px;
   }

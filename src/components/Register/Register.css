@@ -9,6 +9,7 @@
 
 .register__form {
   display: flex;
+  position: relative;
   flex-direction: column;
   padding: 20px 0 16px;
 }
@@ -18,7 +19,7 @@
   font-size: 10px;
   line-height: 12px;
   color: #A0A0A0;
-  padding: 20px 0 10px;
+  padding: 25px 0 10px;
   margin: 0;
 }
 
@@ -73,13 +74,37 @@
   opacity: .7;
 }
 
+.register__error {
+  position: absolute;
+  top: 114px;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  padding: 0;
+  margin: 0;
+  color: #FF004C;
+}
+
+.register__error:nth-of-type(2) {
+  top: 208px;
+}
+
+.register__error:last-of-type {
+  top: 300px;
+}
+
+.disabled {
+  cursor: default;
+  background-color: #2be07f5e;
+}
+
 @media screen and (max-width: 768px) {
   .register__submit {
     margin: 91px 0 0;
   }
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 480px) {
   .register__title {
     margin: 0 auto;
   }
@@ -99,5 +124,18 @@
     font-size: 12px;
     line-height: 15px;
     padding-bottom: 30px;
+  }
+
+  .register__error {
+    top: 154px;
+    font-size: 8px;
+  }
+
+  .register__error:nth-of-type(2) {
+    top: 248px;
+  }
+  
+  .register__error:last-of-type {
+    top: 340px;
   }
 }

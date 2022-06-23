@@ -2,11 +2,22 @@ import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import './Profile.css';
 
-const Profile = ({ handleLogout }) => {
+const Profile = ({ handleLogout, handleUpdateUser }) => {
   const user = useContext( UserContext );
   const [ name, setName ] = useState( user.name );
   const [ email, setEmail ] = useState( user.email );
   const [ disabled, setDisabled ] = useState( true );
+
+  const handleEdit = () => {
+    setDisabled( false );
+  };
+
+  const handleSave = () => {
+    setDisabled( true );
+    handleUpdateUser( name, email );
+  };
+
+  const disabledSave = () => !( name && email );
 
   useEffect(() => {
     setName( user.name );
@@ -38,11 +49,30 @@ const Profile = ({ handleLogout }) => {
           disabled={disabled}
         />
       </div>
-      <button className='profile__button profile__edit'>Редактировать</button>
-      <button
-        className='profile__button profile__signout'
-        onClick={handleLogout}
-      >Выйти из аккаунта</button>
+      { disabled
+        ? <>
+        <button
+          className='profile__button profile__edit'
+          onClick={handleEdit}
+        >
+          Редактировать
+        </button>
+        <button
+          className='profile__button profile__signout'
+          onClick={handleLogout}
+        >Выйти из аккаунта</button>
+        </>
+        : <>
+            {disabledSave() && <p className='profile__error'>Поле имя и email обязательные</p>}
+            <button
+                className={`profile__edit-button ${disabledSave() && 'disabled'}`}
+                onClick={handleSave}
+                disabled={disabledSave()}
+              >
+                Сохранить
+              </button>
+          </>
+      }
     </div>
   );
 };

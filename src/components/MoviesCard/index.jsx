@@ -36,11 +36,19 @@ const MoviesCard = ( props ) => {
         .then(( res ) => props.addFavourite( res ))
         .catch(( err ) => props.errorHandler( err ));
   };
+
   return (
     <div className="movies-card">
       <div className="movies-card__container">
         <div className="movies-card__info">
-          <p className="movies-card__title">{ props.cart.nameRU }</p>
+          <a
+            className="movies-card__title"
+            target="_blank"
+            rel="noreferrer"
+            href={props.cart.trailerLink}
+          >
+            { props.cart.nameRU }
+          </a>
           <p className="moovies-card__duration">{ convertTime( props.cart.duration ) }</p>
         </div>
         { props.isSaved

@@ -1,12 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { useFormWithValidation } from '../../utils/hooks/useFormWithValidation';
 import './Register.css';
 
 const Register = ({ handleClick, isLogin }) => {
-  const [ email, setEmail ] = useState( '' );
-  const [ name, setName ] = useState( '' );
-  const [ password, setPassword ] = useState( '' );
   const history = useHistory();
+  const {
+    values, handleChange, errors, isValid,
+  } = useFormWithValidation();
+
+  const handleRegistrer = ( evt ) => {
+    evt.preventDefault();
+    handleClick( values.email, values.password, values.name );
+  };
+
+  const nameValidation = ( evt ) => {
+    !evt.key.match( /[\s\-а-яА-Яa-zA-Z]/g ) && evt.preventDefault();
+  };
 
   useEffect(() => isLogin && history.push( '/movies' ), [ isLogin ]);
 
@@ -19,29 +29,40 @@ const Register = ({ handleClick, isLogin }) => {
           type="text"
           id="register__name"
           className="register__input"
-          value={name}
-          onChange={( evt ) => setName( evt.target.value )}
+          name="name"
+          value={values.name}
+          onChange={handleChange}
+          onKeyDown={nameValidation}
+          required
         />
         <label htmlFor="register__email" className="register__label">E-mail</label>
+        <p className='register__error'>{errors.name}</p>
         <input
           type="email"
           id="register__email"
           className="register__input"
-          value={email}
-          onChange={( evt ) => setEmail( evt.target.value )}
+          name="email"
+          value={values.email}
+          onChange={handleChange}
+          required
         />
+        <p className='register__error'>{errors.email}</p>
         <label htmlFor="register__password" className="register__label">Пароль</label>
         <input
           type="password"
           id="register__password"
           className="register__input"
-          value={password}
-          onChange={( evt ) => setPassword( evt.target.value )}
+          name="password"
+          value={values.password}
+          onChange={handleChange}
+          required
         />
+        <p className='register__error'>{errors.password}</p>
         <button
           type="submit"
-          className="register__submit"
-          onClick={( evt ) => handleClick( evt, email, password, name )}
+          className={`register__submit ${!isValid && 'disabled'}`}
+          onClick={handleRegistrer}
+          disabled={!isValid}
         >
           Зарегистрироваться
         </button>

@@ -28,7 +28,7 @@ import Portfolio from '../Portfolio';
 import './App.css';
 import ProtectedRoute from '../ProtectedRoute';
 import {
-  fetchGetUserInfo, fetchSignIn, fetchSignOut, fetchSignUp,
+  fetchGetUserInfo, fetchSignIn, fetchSignOut, fetchSignUp, fetchUpdateUserInfo,
 } from '../../utils/apis';
 import { UserContext } from '../../contexts/UserContext';
 import { ErrorContext } from '../../contexts/ErrorContext';
@@ -67,8 +67,7 @@ function App() {
       });
   };
 
-  const handleLogin = ( evt, email, password ) => {
-    evt.preventDefault();
+  const handleLogin = ( email, password ) => {
     login( email, password );
   };
 
@@ -84,12 +83,25 @@ function App() {
       });
   };
 
-  const handleRegister = ( evt, email, password, name ) => {
-    evt.preventDefault();
+  const handleRegister = ( email, password, name ) => {
     fetchSignUp( email, password, name )
       .then(() => {
         login( email, password );
       })
+      .catch(( err ) => {
+        errorHandler( err );
+      });
+  };
+
+  const handleUpdateUser = ( name, email ) => {
+    fetchUpdateUserInfo( name, email )
+      .then(
+        fetchGetUserInfo()
+          .then(() => {
+            setUser({ name, email });
+          })
+          .catch(( err ) => errorHandler( err )),
+      )
       .catch(( err ) => {
         errorHandler( err );
       });
@@ -147,6 +159,7 @@ function App() {
           <SearchForm
             isShort={isShort}
             setIsShort={setIsShort}
+            searchText={searchText}
             setSearchText={setSearchText}
             handleSearch={() => setIsSearch( true )}
           />
@@ -164,6 +177,7 @@ function App() {
           <SearchForm
             isShort={isShort}
             setIsShort={setIsShort}
+            searchText={searchText}
             setSearchText={setSearchText}
             handleSearch={() => setIsSearch( true )}
           />
@@ -180,7 +194,10 @@ function App() {
           isLogin={ isLogin }
         >
           <UserContext.Provider value={ user } >
-            <Profile handleLogout={ handleLogout }/>
+            <Profile
+              handleLogout={ handleLogout }
+              handleUpdateUser={ handleUpdateUser }
+            />
           </UserContext.Provider>
         </ProtectedRoute>
         <Route path="/404">

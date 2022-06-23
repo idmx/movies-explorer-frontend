@@ -88,7 +88,7 @@
   }
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 480px) {
   .promo {
     padding: 70px 10px 0;
   }

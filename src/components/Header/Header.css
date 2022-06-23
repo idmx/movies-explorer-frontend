@@ -21,7 +21,7 @@
   }
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 480px) {
   .header__sign {
     width: 100%;
     justify-content: center;
