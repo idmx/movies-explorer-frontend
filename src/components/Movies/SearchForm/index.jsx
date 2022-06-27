@@ -36,7 +36,7 @@ const SearchForm = ( props ) => {
           onChange={( evt ) => setText( evt.target.value )}
         />
         <button
-          className={`search-form__icon ${!props.searchText && 'search-form__disabled'}`}
+          className={`search-form__icon ${!text && 'search-form__disabled'}`}
           onClick={handleClickSearch}
           disabled={ !text }
         />
