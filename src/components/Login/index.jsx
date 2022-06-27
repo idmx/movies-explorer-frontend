@@ -25,7 +25,7 @@ const Login = ({ handleClick, isLogin }) => {
         <input
           type="email"
           id="login__email"
-          className={`login__input ${errors.email && 'login__input-error'}`}
+          className="login__input"
           name="email"
           value={values.email}
           onChange={handleChange}
@@ -36,7 +36,7 @@ const Login = ({ handleClick, isLogin }) => {
         <input
           type="password"
           id="login__password"
-          className={`login__input ${errors.password && 'login__input-error'}`}
+          className="login__input"
           name="password"
           value={values.password}
           onChange={handleChange}
@@ -45,7 +45,7 @@ const Login = ({ handleClick, isLogin }) => {
         <p className='login__error'>{errors.password}</p>
         <button
           type="submit"
-          className={`login__submit ${!isValid && 'disabled'}`}
+          className="login__submit"
           onClick={handleLogin}
           disabled={!isValid}
         >

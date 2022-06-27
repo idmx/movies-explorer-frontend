@@ -86,10 +86,6 @@
   top: 214px;
 }
 
-.login__input-error {
-  color: #FF004C;
-}
-
 .disabled {
   cursor: default;
   background-color: #2be07f5e;
