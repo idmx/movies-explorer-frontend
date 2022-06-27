@@ -5,7 +5,7 @@ import { Route, Redirect } from 'react-router-dom';
 const ProtectedRoute = ({ isLogin, ...props }) => (
   ( isLogin ?? true )
     ? <Route { ...props }/>
-    : <Redirect to="/sign-in"/>
+    : <Redirect to="/"/>
 );
 
 export default ProtectedRoute;

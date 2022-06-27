@@ -59,11 +59,17 @@ const MoviesCard = ( props ) => {
             />
         }
       </div>
-      <img
-        className="moovies-card__image"
-        src={ props.image }
-        alt={ props.title }
-      />
+      <a
+        target="_blank"
+        rel="noreferrer"
+        href={props.cart.trailerLink}
+      >
+        <img
+          className="moovies-card__image"
+          src={ props.image }
+          alt={ props.title }
+        />
+      </a>
     </div>
   );
 };

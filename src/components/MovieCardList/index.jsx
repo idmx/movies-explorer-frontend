@@ -3,7 +3,7 @@ import { fetchAllMovies, fetchGetSavedMovies } from '../../utils/apis';
 import { API_MOVIES_URL } from '../../utils/constants/api';
 import Preloader from '../Movies/Preloader';
 import MoviesCard from '../MoviesCard';
-import { ErrorContext } from '../../contexts/ErrorContext';
+import { ModalContext } from '../../contexts/ModalContext';
 import './MoviesCardList.css';
 
 const MoviesCardList = ( props ) => {
@@ -14,8 +14,10 @@ const MoviesCardList = ( props ) => {
   const [ favouriteMovies, setFavouriteMovies ] = useState([]);
   const [ pages, setPages ] = useState( 0 );
   const [ moviesInPage, setMoviesInPage ] = useState([]);
+  const [ hasMovies, setHasMovies ] = useState( false );
+  const [ isFirstSearch, setIsFirstSearch ] = useState( true );
 
-  const { errorHandler } = useContext( ErrorContext );
+  const { errorHandler } = useContext( ModalContext );
 
   const addFavourite = ( film ) => {
     setFavouriteMovies([ ...favouriteMovies, film ]);
@@ -76,19 +78,24 @@ const MoviesCardList = ( props ) => {
   };
 
   const filteredBySearch = ( allFilms ) => {
+    setIsFirstSearch( false );
     const films = allFilms.filter(( movie ) => movie.nameRU.toLowerCase()
       .includes( props.searchText.toLowerCase()));
+    setHasMovies( !!films.length );
     props.setIsSearch( false );
     setMovies( films );
     return films;
   };
 
-  const filteredByFavourite = ( films ) => films.map(( film ) => ({
-    ...film,
-    favourite: favouriteMovies.some(( movie ) => movie.nameRU === film.nameRU ),
-    _id: favouriteMovies.some(( movie ) => movie.nameRU === film.nameRU )
-        && favouriteMovies.find(( movie ) => movie.nameRU === film.nameRU )._id,
-  }));
+  const filteredByFavourite = ( films ) => films.map(( film ) => {
+    const filteredMovie = favouriteMovies.some(( movie ) => movie.nameRU === film.nameRU );
+    return ({
+      ...film,
+      favourite: filteredMovie,
+      _id: filteredMovie
+          && favouriteMovies.find(( movie ) => movie.nameRU === film.nameRU )._id,
+    });
+  });
 
   const filteredBySaved = ( allFilms ) => {
     const films = props.isSaved ? allFilms.filter(( movie ) => movie.favourite ) : allFilms;
@@ -99,7 +106,7 @@ const MoviesCardList = ( props ) => {
   const getFilteredMovies = async () => {
     !allMovies.length && getMovies();
     let allFilms = [];
-    if ( props.searchText ) {
+    if ( props.searchText || props.isSaved ) {
       allFilms = filteredBySearch( allMovies );
     }
     if ( props.isShort ) {
@@ -115,7 +122,8 @@ const MoviesCardList = ( props ) => {
     setIsFetching( true );
     fetchGetSavedMovies()
       .then(( res ) => {
-        setFavouriteMovies( res );
+        const id = localStorage.getItem( 'id' );
+        setFavouriteMovies( res.filter(( movie ) => movie.owner === id ));
         setIsFetching( false );
       })
       .catch(( err ) => errorHandler( err ));
@@ -123,7 +131,7 @@ const MoviesCardList = ( props ) => {
 
   useEffect(() => {
     getFilteredMovies();
-  }, [ allMovies, favouriteMovies, props.isShort, props.isSaved ]);
+  }, [ allMovies, favouriteMovies, props.isShort, props.isSaved, props.searchText ]);
 
   useEffect(() => {
     props.isSearch && getFilteredMovies();
@@ -143,7 +151,8 @@ const MoviesCardList = ( props ) => {
         : <div className={`${props.isSaved && 'movies-list__saved'} movies-list`}>
           <div className="movies-list__container">
             {
-             moviesInPage.map(( item ) => (
+             hasMovies
+               ? moviesInPage.map(( item ) => (
                 <MoviesCard
                   image={`${API_MOVIES_URL}${item.image.url}`}
                   cart={item}
@@ -153,7 +162,9 @@ const MoviesCardList = ( props ) => {
                   removeFavourite={removeFavourite}
                   errorHandler={errorHandler}
                 />
-             ))}
+               ))
+               : !isFirstSearch && <p className="movies-list__not-found">Результаты не найдены</p>
+            }
           </div>
           { !isEndPages && !props.isSaved
               && <button className='movies-list__yet' onClick={incPages}>Еще</button>

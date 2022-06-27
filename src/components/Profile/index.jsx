@@ -6,6 +6,7 @@ const Profile = ({ handleLogout, handleUpdateUser }) => {
   const user = useContext( UserContext );
   const [ name, setName ] = useState( user.name );
   const [ email, setEmail ] = useState( user.email );
+  const [ initData, setInitData ] = useState({ name: user.name, email: user.email });
   const [ disabled, setDisabled ] = useState( true );
 
   const handleEdit = () => {
@@ -14,7 +15,7 @@ const Profile = ({ handleLogout, handleUpdateUser }) => {
 
   const handleSave = () => {
     setDisabled( true );
-    handleUpdateUser( name, email );
+    initData.name !== name && initData.email !== email && handleUpdateUser( name, email );
   };
 
   const disabledSave = () => !( name && email );
@@ -22,6 +23,7 @@ const Profile = ({ handleLogout, handleUpdateUser }) => {
   useEffect(() => {
     setName( user.name );
     setEmail( user.email );
+    setInitData({ name: user.name, email: user.email });
   }, [ user ]);
 
   return (

@@ -3,21 +3,23 @@ import './SearchForm.css';
 
 const SearchForm = ( props ) => {
   const handleClickSearch = () => {
-    localStorage.setItem( 'search', props.searchText );
+    !props.isSaved && localStorage.setItem( 'search', props.searchText );
     props.handleSearch();
   };
 
   const handleClickShort = () => {
-    localStorage.setItem( 'short', !props.isShort );
+    props.isSaved
+      ? localStorage.setItem( 'saved-short', !props.isShort )
+      : localStorage.setItem( 'short', !props.isShort );
     props.setIsShort( !props.isShort );
   };
 
   useEffect(() => {
-    const text = localStorage.getItem( 'search' );
-    const short = localStorage.getItem( 'short' );
-    text && props.setSearchText( text );
+    const text = props.isSaved ? '' : localStorage.getItem( 'search' );
+    const short = props.isSaved ? localStorage.getItem( 'saved-short' ) : localStorage.getItem( 'short' );
+    props.setSearchText( text );
     props.setIsShort( short === 'true' );
-  }, []);
+  }, [ props.isSaved ]);
 
   return (
     <div className="search-form">
@@ -30,8 +32,9 @@ const SearchForm = ( props ) => {
           onChange={( evt ) => props.setSearchText( evt.target.value )}
         />
         <button
-          className="search-form__icon"
+          className={`search-form__icon ${!props.searchText && 'search-form__disabled'}`}
           onClick={handleClickSearch}
+          disabled={ !props.searchText }
         />
       </div>
       <div className="search-form__short-container">

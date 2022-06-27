@@ -65,6 +65,15 @@
   background-image: url("../../../images/slider-on.svg");
 }
 
+.search-form__disabled {
+  opacity: .5;
+  cursor: default;
+}
+
+.search-form__disabled:hover {
+  opacity: .5;
+}
+
 @media screen and (max-width: 768px) {
   .search-form {
     flex-direction: column;

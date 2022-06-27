@@ -31,8 +31,8 @@ import {
   fetchGetUserInfo, fetchSignIn, fetchSignOut, fetchSignUp, fetchUpdateUserInfo,
 } from '../../utils/apis';
 import { UserContext } from '../../contexts/UserContext';
-import { ErrorContext } from '../../contexts/ErrorContext';
-import ErrorModal from '../ErrorModal';
+import { ModalContext } from '../../contexts/ModalContext';
+import Modal from '../Modal';
 
 function App() {
   const [ isShort, setIsShort ] = useState( false );
@@ -40,7 +40,8 @@ function App() {
   const [ isLogin, setIsLogin ] = useState( null );
   const [ searchText, setSearchText ] = useState( '' );
   const [ user, setUser ] = useState( '' );
-  const [ error, setError ] = useState( '' );
+  const [ textModal, setTextModal ] = useState( '' );
+  const [ success, setSuccess ] = useState( false );
 
   const ref = useRef();
   const location = useLocation();
@@ -50,8 +51,17 @@ function App() {
 
   const errorHandler = ( err ) => {
     err.statusCode
-      ? setError( 'Что-то пошло не так, попробуйте еще раз!' )
-      : setError( err.message );
+      ? setTextModal( 'Что-то пошло не так, попробуйте еще раз!' )
+      : setTextModal( err.message );
+  };
+
+  const cleanUp = () => {
+    localStorage.removeItem( 'id' );
+    localStorage.removeItem( 'movies' );
+    localStorage.removeItem( 'saved-short' );
+    localStorage.removeItem( 'short' );
+    localStorage.removeItem( 'search' );
+    setSearchText( '' );
   };
 
   const login = ( email, password ) => {
@@ -60,6 +70,11 @@ function App() {
         setIsLogin( true );
         localStorage.setItem( 'id', res._id );
         history.push( '/movies' );
+        fetchGetUserInfo()
+          .then(( result ) => {
+            setUser({ name: result.name, email: result.email });
+          })
+          .catch(( err ) => errorHandler( err ));
       })
       .catch(( err ) => {
         errorHandler( err );
@@ -75,7 +90,7 @@ function App() {
     fetchSignOut()
       .then(() => {
         setIsLogin( false );
-        localStorage.removeItem( 'id' );
+        cleanUp();
       })
       .catch(( err ) => {
         errorHandler( err );
@@ -98,6 +113,8 @@ function App() {
         fetchGetUserInfo()
           .then(() => {
             setUser({ name, email });
+            setSuccess( true );
+            setTextModal( 'Информация сохранена' );
           })
           .catch(( err ) => errorHandler( err )),
       )
@@ -124,8 +141,8 @@ function App() {
 
   return (
     <div className='app'>
-      <ErrorContext.Provider value={{ errorHandler }}>
-      <Header />
+      <ModalContext.Provider value={{ errorHandler }}>
+      <Header isLogin={ isLogin }/>
       <Main>
       <Switch>
         <Route path="/" exact>
@@ -178,6 +195,7 @@ function App() {
             setIsShort={setIsShort}
             searchText={searchText}
             setSearchText={setSearchText}
+            isSaved={true}
             handleSearch={() => setIsSearch( true )}
           />
           <MoviesCardList
@@ -208,8 +226,8 @@ function App() {
       </Switch>
       </Main>
       <Footer />
-      <ErrorModal error={error} setError={setError}/>
-      </ErrorContext.Provider>
+      <Modal textModal={textModal} setTextModal={setTextModal} success={success}/>
+      </ModalContext.Provider>
     </div>
   );
 }

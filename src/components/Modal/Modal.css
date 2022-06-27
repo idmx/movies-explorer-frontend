@@ -1,4 +1,4 @@
-.error {
+.modal {
   display: flex;
   position: fixed;
   top: 0;
@@ -8,7 +8,7 @@
   height: 100%;
 }
 
-.error__container {
+.modal__container {
   display: flex;
   flex-direction: column;
   width: 300px;
@@ -20,7 +20,7 @@
   box-shadow: 0 3px 5px rgb(0 0 0 / 70%);
 }
 
-.error__button {
+.modal__button {
   font-size: 16px;
   margin-bottom: 10px;
   background-color: #2BE080;
@@ -32,14 +32,14 @@
   cursor: pointer;
 }
 
-.error__title {
+.modal__title {
   font-size: 24px;
   text-align: center;
   margin: 0;
   padding: 0 0 20px;
 }
 
-.error__description {
+.modal__description {
   font-size: 18px;
   text-align: center;
   margin: 0;

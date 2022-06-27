@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useFormWithValidation } from '../../utils/hooks/useFormWithValidation';
+import { validateEmail } from '../../utils/helpers/validate';
 import './Login.css';
 
 const Login = ({ handleClick, isLogin }) => {
@@ -30,7 +31,7 @@ const Login = ({ handleClick, isLogin }) => {
           onChange={handleChange}
           required
         />
-        <p className='login__error'>{errors.email}</p>
+        { 'email' in values && !validateEmail( values.email ) && <p className='login__error'>{ !values.email ? 'Заполните это поле' : 'Email некорректный' }</p> }
         <label htmlFor="login__password" className="login__label">Пароль</label>
         <input
           type="password"
