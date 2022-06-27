@@ -38,7 +38,7 @@ const SearchForm = ( props ) => {
         <button
           className={`search-form__icon ${!props.searchText && 'search-form__disabled'}`}
           onClick={handleClickSearch}
-          disabled={ !props.searchText }
+          disabled={ !text }
         />
       </div>
       <div className="search-form__short-container">
