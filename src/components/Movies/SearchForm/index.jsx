@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './SearchForm.css';
 
 const SearchForm = ( props ) => {
+  const [ text, setText ] = useState( '' );
+
   const handleClickSearch = () => {
-    !props.isSaved && localStorage.setItem( 'search', props.searchText );
+    props.setSearchText( text );
+    !props.isSaved && localStorage.setItem( 'search', text );
     props.handleSearch();
   };
 
@@ -15,9 +18,10 @@ const SearchForm = ( props ) => {
   };
 
   useEffect(() => {
-    const text = props.isSaved ? '' : localStorage.getItem( 'search' );
+    const searchText = props.isSaved ? '' : localStorage.getItem( 'search' );
     const short = props.isSaved ? localStorage.getItem( 'saved-short' ) : localStorage.getItem( 'short' );
-    props.setSearchText( text );
+    setText( searchText );
+    props.setSearchText( searchText );
     props.setIsShort( short === 'true' );
   }, [ props.isSaved ]);
 
@@ -28,8 +32,8 @@ const SearchForm = ( props ) => {
           className="search-form__input"
           type="text"
           placeholder="Фильм"
-          value={props.searchText}
-          onChange={( evt ) => props.setSearchText( evt.target.value )}
+          value={text}
+          onChange={( evt ) => setText( evt.target.value )}
         />
         <button
           className={`search-form__icon ${!props.searchText && 'search-form__disabled'}`}
