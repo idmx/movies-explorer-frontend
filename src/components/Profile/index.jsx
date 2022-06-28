@@ -15,7 +15,7 @@ const Profile = ({ handleLogout, handleUpdateUser }) => {
 
   const handleSave = () => {
     setDisabled( true );
-    initData.name !== name && initData.email !== email && handleUpdateUser( name, email );
+    ( initData.name !== name || initData.email !== email ) && handleUpdateUser( name, email );
   };
 
   const disabledSave = () => !( name && email );
