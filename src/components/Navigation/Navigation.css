@@ -41,6 +41,7 @@
   width: 44px;
   height: 44px;
   margin: 15px 30px;
+  cursor: pointer;
 }
 
 .menu__close-button {
@@ -54,6 +55,7 @@
   background-color: inherit;
   width: 32px;
   height: 32px;
+  cursor: pointer;
 }
 
 .overlay {
@@ -120,7 +122,7 @@
   }
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 480px) {
   .menu__burger-button {
     margin: 15px 14px;
   }

@@ -1,17 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 import './Profile.css';
 
-const userName = 'Вячеслав';
-const userEmail = '123@mail.ru';
-
-const Profile = () => {
-  const [ name, setName ] = useState( userName );
-  const [ email, setEmail ] = useState( userEmail );
+const Profile = ({ handleLogout, handleUpdateUser }) => {
+  const user = useContext( UserContext );
+  const [ name, setName ] = useState( user.name );
+  const [ email, setEmail ] = useState( user.email );
+  const [ initData, setInitData ] = useState({ name: user.name, email: user.email });
   const [ disabled, setDisabled ] = useState( true );
+
+  const handleEdit = () => {
+    setDisabled( false );
+  };
+
+  const handleSave = () => {
+    setDisabled( true );
+    ( initData.name !== name || initData.email !== email ) && handleUpdateUser( name, email );
+  };
+
+  const disabledSave = () => !( name && email );
+
+  useEffect(() => {
+    setName( user.name );
+    setEmail( user.email );
+    setInitData({ name: user.name, email: user.email });
+  }, [ user ]);
 
   return (
     <div className='profile'>
-      <h2 className='profile__say-hi'>Привет, {userName}</h2>
+      <h2 className='profile__say-hi'>Привет, {user.name}</h2>
       <div className='profile__container'>
         <label htmlFor="profile__name" className='profile__text'>Имя</label>
         <input
@@ -34,8 +51,30 @@ const Profile = () => {
           disabled={disabled}
         />
       </div>
-      <button className='profile__button profile__edit'>Редактировать</button>
-      <button className='profile__button profile__signout'>Выйти из аккаунта</button>
+      { disabled
+        ? <>
+        <button
+          className='profile__button profile__edit'
+          onClick={handleEdit}
+        >
+          Редактировать
+        </button>
+        <button
+          className='profile__button profile__signout'
+          onClick={handleLogout}
+        >Выйти из аккаунта</button>
+        </>
+        : <>
+            {disabledSave() && <p className='profile__error'>Поле имя и email обязательные</p>}
+            <button
+                className={`profile__edit-button ${disabledSave() && 'disabled'}`}
+                onClick={handleSave}
+                disabled={disabledSave()}
+              >
+                Сохранить
+              </button>
+          </>
+      }
     </div>
   );
 };

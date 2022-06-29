@@ -1,10 +1,12 @@
 .movies-card {
+  width: 100%;
   max-width: 364px;
   max-height: 271px;
   padding-bottom: 30px;
 }
 
 .movies-card__container {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -14,18 +16,22 @@
 }
 
 .movies-card__info {
-  max-width: 280px;
+  width: 80%;
 }
 
 .movies-card__title {
+  display: block;
   font-weight: 500;
   font-size: 15px;
   line-height: 18px;
+  text-decoration: none;
+  color: #000;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   margin: 0;
-  padding: 0 0 9px 14px;
+  padding: 0 30px 9px 14px;
+  cursor: pointer;
 }
 
 .moovies-card__duration {
@@ -38,9 +44,10 @@
 }
 
 .moovies-card__favourite {
-  width: 30px;
-  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
   background-image: url("../../images/favourite-on.svg");
+  background-size: cover;
   border: none;
   background-color: inherit;
   cursor: pointer;
@@ -92,7 +99,7 @@
   }
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 480px) {
   .movies-card {
     width: 100%;
     max-width: 300px;

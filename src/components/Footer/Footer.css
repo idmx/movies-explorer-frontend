@@ -48,7 +48,7 @@
   }
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 480px) {
   .footer {
     padding: 80px 10px 10px;
   }

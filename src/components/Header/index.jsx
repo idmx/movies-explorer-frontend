@@ -6,8 +6,8 @@ import Navigation from '../Navigation';
 import { ROUTES } from '../../utils/constants/routes';
 import './Header.css';
 
-const Children = ({ location }) => {
-  if ( ROUTES.ROUTE_WITH_NAV.includes( location.pathname )) {
+const Children = ({ location, isLogin }) => {
+  if ( ROUTES.ROUTE_WITH_NAV.includes( location.pathname ) || isLogin ) {
     return <Navigation />;
   } if ( location.pathname === ROUTES.ROOT_ROUTE ) {
     return <NavTab />;
@@ -15,7 +15,7 @@ const Children = ({ location }) => {
   return null;
 };
 
-const Header = () => {
+const Header = ({ isLogin }) => {
   const location = useLocation();
 
   if ( location.pathname === '/404' ) {
@@ -29,7 +29,7 @@ const Header = () => {
         ${ROUTES.ROUTE_WITHOUTE_NAV.includes( location.pathname ) && 'header__sign'}`
         }>
         <Logo />
-        <Children location={ location }/>
+        <Children location={ location } isLogin={ isLogin }/>
       </header>
   );
 };
